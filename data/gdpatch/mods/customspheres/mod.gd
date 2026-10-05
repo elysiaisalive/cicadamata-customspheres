@@ -15,7 +15,6 @@ const DEFAULT_LVL_CFG: Dictionary = {
 	"location": "UNIDENTIFIED",
 	"conditions": "NEUTRAL + TEMPERATURE: ???°",
 	"warning": "UNIDENTIFIED SPHERE DETECTED",
-	#"levelmusic": null,
 	"red_score" : 9999,
 	"dmnd_score" : 999,
 	"gold_score" : 99,
@@ -68,6 +67,20 @@ func get_shipscreen(level:String)->String:
 	});
 
 
+func get_intromusic(level:String)->AudioStream:
+	return GDPatch.get_mod("customspheres").custom_levels[level].get('intromusic', Audio.mscWorld1_Intro);
+
+
+func get_mainmusic(level:String)->AudioStream:
+	return GDPatch.get_mod("customspheres").custom_levels[level].get('mainmusic', Audio.mscWorld1_Main);
+
+
+func load_skybox(level:String)->ImageTexture:
+	var _path: String = level_directory.path_join(level);
+
+	return load_texture(_path.path_join("skybox.png"));
+
+
 func load_thumbnail(level:String)->ImageTexture:
 	var _path: String = level_directory.path_join(level);
 
@@ -96,6 +109,12 @@ func load_config(dir:String, fname:String)->Dictionary:
 	return DEFAULT_LVL_CFG.duplicate();
 
 
+func load_music(path:String)->AudioStreamOggVorbis:
+	var _music: AudioStreamOggVorbis = AudioStreamOggVorbis.load_from_file(path);
+	_music.loop = true;
+	return _music;	
+
+
 func load_texture(path:String)->ImageTexture:
 	if !FileAccess.file_exists(path): 
 		return null;
@@ -108,7 +127,7 @@ func load_texture(path:String)->ImageTexture:
 
 
 func load_custom_levels()->void:
-	var _main_dir: DirAccess = DirAccess.open(level_directory)
+	var _main_dir: DirAccess = DirAccess.open(level_directory);
 
 	if _main_dir:
 		_main_dir.list_dir_begin();
@@ -118,10 +137,10 @@ func load_custom_levels()->void:
 		while _sub_dir != "":
 			if _main_dir.current_is_dir() && !_sub_dir.begins_with("."):
 				
-				var _folder_path: String = level_directory.path_join(_sub_dir)
+				var _folder_path: String = level_directory.path_join(_sub_dir);
 				
-				var _scene_file_name: String = _sub_dir + ".tscn"
-				var _full_scene_path: String = _folder_path.path_join(_scene_file_name)
+				var _scene_file_name: String = _sub_dir + ".tscn";
+				var _full_scene_path: String = _folder_path.path_join(_scene_file_name);
 
 				if !ResourceLoader.exists(_full_scene_path):
 					_scene_file_name = _sub_dir + ".scn";
@@ -132,6 +151,8 @@ func load_custom_levels()->void:
 
 					if _try_load != null:
 						custom_levels[_sub_dir] = load_config(_folder_path, _sub_dir);
+						custom_levels[_sub_dir]["intromusic"] = load_music(_folder_path.path_join(_sub_dir + "_intro.ogg"));##music 
+						custom_levels[_sub_dir]["levelmusic"] = load_music(_folder_path.path_join(_sub_dir + "_main.ogg"));
 						custom_levels[_sub_dir]["path"] = _full_scene_path;
 
 			_sub_dir = _main_dir.get_next();

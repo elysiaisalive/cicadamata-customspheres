@@ -39,7 +39,6 @@ GDPatch.patch_script_as_text("Scripts/UI/custom.gdc", function(ctx, src)
 				_new_lvlbutton.get_node('LvlScore').text = GDPatch.get_mod("customspheres").custom_levels[lvl].author;
 				_new_lvlbutton.get_node('LevelButton').pressed.connect(_new_lvlbutton.get_node("../../..")._on_lvl_pressed.bind(lvl, false));
 				_new_lvlbutton.get_node('LevelButton').focus_entered.connect(_new_lvlbutton.get_node("../../..")._on_lvl_focus.bind(lvl, false));
-				_new_lvlbutton.get_node('LvlScore').show();
 				_lvlbleh.add_child(_new_lvlbutton)
 	]]
 	)
@@ -117,6 +116,19 @@ GDPatch.patch_script_as_text("Scripts/UI/ship_screen.gdc", function(ctx, src)
 		$Label3.text = GDPatch.get_mod("customspheres").custom_levels.get(global.currentlevel).pretitle + " + " + "CUSTOM"
 		$Label14.modulate = Color("ea531f")
 		return
+	]]
+	)
+	return src
+end)
+
+-- patch music
+GDPatch.patch_script_as_text("Scripts/Player/Player2.gdc", function(ctx, src)
+	src = src:gsub(
+		utils.escape([[func _ready() -> void :]]),
+		[[%0
+	if GDPatch.get_mod("customspheres").custom_levels.has(global.currentlevel):
+		if global.play_intro_music:
+			Audio.music_play(GDPatch.get_mod("customspheres").get_intromusic(global.currentlevel));
 	]]
 	)
 	return src
