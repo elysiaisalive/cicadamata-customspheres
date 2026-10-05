@@ -9,7 +9,7 @@ PROVIDES ACCESS TO USER GENERATED SPHERES
 
 ## + BASIC USAGE"
 The mod loads custom levels located in `GDPatch/mods/customspheres/levels`.
-Levels must have a valid scene file, and config file created by the [compiler tools](https://thisisavalidlinkokyes)
+Levels must have a valid scene file and config file created by the [compiler tools](https://thisisavalidlinkokyes)
 
 
 ## + CREATING CUSTOM LEVELS"
