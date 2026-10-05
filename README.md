@@ -11,6 +11,10 @@ PROVIDES ACCESS TO USER GENERATED SPHERES
 The mod loads custom levels located in `GDPatch/mods/customspheres/levels`.
 Levels must have a valid '.scn' file, and a config file created by the [compiler tools](https://thisisavalidlinkokyes)
 
+You can provide custom icons and thumbnails for levels by adding an `icon.png` and a `level_name.png`.
+It is recommended to keep icons at 9x9, and thumbnails at 84x69 to keep consistency with the games style.
+
+All custom level assets besides `icon.png` must match the name of the level/containing folder, otherwise they will not load.
 
 ## + CREATING CUSTOM LEVELS"
 To create a custom level, you will need the [CICADAMATA FGD](https://github.com/elysiaisalive/cicadamata-fgd), and [Trenchbroom 2025.4+](https://github.com/TrenchBroom/TrenchBroom/releases#release-v2025.4)
