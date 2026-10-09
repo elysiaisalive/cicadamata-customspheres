@@ -39,7 +39,7 @@ It is recommended to keep icons at `9x9`, and thumbnails at `84x69` to keep cons
 To add custom music to your level you must add an `intro.ogg` and `main.ogg`.
 #### Custom Skybox and Ambience
 Levels can also have a custom ambient track and skybox by adding respective `ambience.ogg` and `skybox.png`.
-Skyboxes are recommended to be authored at `2048x1024` and then rescaled to `1024x1024 for the final texture.
+Skyboxes are recommended to be authored at `2048x1024` and then rescaled to `1024x1024` for the final texture.
 
 ### + Level Design Tips/Considerations
 - Keep grid size at `32x` for most main level geometry.
