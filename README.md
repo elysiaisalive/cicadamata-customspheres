@@ -22,11 +22,12 @@ For more information on mapping for trenchbroom, refer to the [official document
 
 ### Creating levels
 - use [GDRE Tools](https://github.com/GDRETools/gdsdecomp) or [PCKExplorer](https://github.com/DmitriySalnikov/GodotPCKExplorer) to decompile and extract the textures from the game.
-- it is highly suggested you create some sort of folder called `CicadamataFGD` and place the textures inside
+- Extract the textures located under `FuncGodot/textures`
+- For optional editor display of mapping entities, extract the models located under `FuncGodot/models`
+- it is highly suggested you create some sort of folder called `CicadamataFGD` and place the textures and models inside
 - set your game path to your FGD folder in Trenchbroom under View > Preferences > Cicadamata > Game Path
 
 Once you run the compile tools, the mod will autogenerate a scene file and a config file located under `CICADAMATA/GDPatch/mods/customspheres/levels/mycustomlevel`.
-
 
 ### Customizing your level
 #### Custom Images
@@ -35,7 +36,8 @@ It is recommended to keep icons at 9x9, and thumbnails at 84x69 to keep consiste
 #### Custom Music
 To add custom music to your level you must add an `intro.ogg` and `main.ogg`.
 #### Custom Skybox and Ambience
-Levels can also have a custom ambient track and skybox by adding respective `ambience.ogg` and `skybox.png` textures.
+Levels can also have a custom ambient track and skybox by adding respective `ambience.ogg` and `skybox.png`.
+Skyboxes are recommended to be authored at 2048x1024 and then rescaled to 1024x1024 for the final texture.
 
 ### Level Design Tips/Considerations
 - Keep grid size at 32x for most main level geometry.
