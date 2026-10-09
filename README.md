@@ -17,12 +17,12 @@ To create a custom level, you will need the [CICADAMATA FGD](https://github.com/
 
 Once you have the FGD and Trenchbroom downloaded, extract the contents to `AppData/Roaming/TrenchBroom/games/Cicadamata`.
 For more information on mapping for trenchbroom, refer to the [official documentation](https://trenchbroom.github.io/manual/latest/)
-
-- use [GDRE Tools](https://github.com/GDRETools/gdsdecomp) or [PCKExplorer](https://github.com/DmitriySalnikov/GodotPCKExplorer) to decompile and extract necessary resources from the game.
-- Extract the textures located under `FuncGodot/textures`
-- For optional editor display of mapping entities, extract the models located under `FuncGodot/models`
-- it is highly suggested you create some sort of folder called `CicadamataFGD` and place the textures and models inside
-- set your game path to your FGD folder in Trenchbroom under `View > Preferences > Cicadamata > Game Path`
+#### + Setting up Trenchbroom
+1. use [GDRE Tools](https://github.com/GDRETools/gdsdecomp) or [PCKExplorer](https://github.com/DmitriySalnikov/GodotPCKExplorer) to decompile and extract necessary resources from the game.
+2. Extract the textures located under `FuncGodot/textures`
+3. For optional editor display of mapping entities, extract the models located under `FuncGodot/models`
+4. create a folder i.e `CicadamataFGD` to hold your FGD assets, and place the textures and models folders inside
+5. set your game path to your FGD folder in Trenchbroom under `View > Preferences > Cicadamata > Game Path`
 
 #### + Setting up compiler tools
 - navigate to `Run > Compile Map`
