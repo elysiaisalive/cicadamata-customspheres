@@ -35,8 +35,8 @@ Once you run the compile tools, the mod will autogenerate a scene file and a con
 
 ### + Customizing your level
 #### Config Properties
-|key|value|description|
-|:-:|
+| key | value | description |
+| :-: | :-: | :-- |
 | author |string | It's you. |
 | conditions | string | Conditions on the dropship screen |
 | location | string | Location on the dropship screen |
