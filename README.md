@@ -11,7 +11,6 @@ PROVIDES ACCESS TO USER GENERATED SPHERES
 The mod loads custom levels located in `GDPatch/mods/customspheres/levels`.
 Levels must have a valid scene file and config file created by the [compiler tools](https://thisisavalidlinkokyes)
 
-
 ## + QUICKSTART
 To create a custom level, you will need the [CICADAMATA FGD](https://github.com/elysiaisalive/cicadamata-fgd), and [Trenchbroom 2025.4+](https://github.com/TrenchBroom/TrenchBroom/releases#release-v2025.4)
 
@@ -26,7 +25,7 @@ For more information on mapping for trenchbroom, refer to the [official document
 
 #### + Setting up compiler tools
 - navigate to `Run > Compile Map`
-- change the 'Run Tool path to your game executable (`steam/steamapps/common/CICADAMATA/CICADAMATA.exe`)
+- change the 'Run Tool' path to your game executable (`steam/steamapps/common/CICADAMATA/CICADAMATA.exe`)
 - set parameters to `run_map::${MAP_DIR_PATH}/${MAP_FULL_NAME}::${MAP_BASE_NAME}`
 - you can now run the compile tools and start testing your new map!
 
@@ -47,5 +46,8 @@ Skyboxes are recommended to be authored at 2048x1024 and then rescaled to 1024x1
 - Keep func_spikes at maximum heights of 16-32 Units.
 - Create all brushes with __tb_empty, apply textures to all visible brush faces, and then replace all instances of __tb_empty with the 'skip' texture. This workflow makes it much easier to optimize geometry and unseen faces.
 
+#### + Caveats // TBD
+- Player leaderboards are not available
+- Custom map textures are currently not possible
 
 ### + ACCESS USER CONTENT AT YOUR OWN RISK +
