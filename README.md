@@ -20,7 +20,7 @@ For a guide to get started, read [here](https://github/ccdamappingtutorial).
 Once you have the FGD and Trenchbroom downloaded, drop the Game Config in `AppData/Roaming/TrenchBroom/games/Cicadamata`.
 For more information on mapping for trenchbroom, refer to the [official documentation](https://trenchbroom.github.io/manual/latest/)
 
-### + Creating levels
+### + QUICKSTART
 - use [GDRE Tools](https://github.com/GDRETools/gdsdecomp) or [PCKExplorer](https://github.com/DmitriySalnikov/GodotPCKExplorer) to decompile and extract the textures from the game.
 - Extract the textures located under `FuncGodot/textures`
 - For optional editor display of mapping entities, extract the models located under `FuncGodot/models`
