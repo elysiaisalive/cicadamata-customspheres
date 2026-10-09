@@ -15,10 +15,11 @@ const DEFAULT_LVL_CFG: Dictionary = {
 	"location": "UNIDENTIFIED",
 	"conditions": "NEUTRAL + TEMPERATURE: ???°",
 	"warning": "UNIDENTIFIED SPHERE DETECTED",
-	"red_score" : 9999,
-	"dmnd_score" : 999,
-	"gold_score" : 99,
-	"slvr_score" : 9,
+	"red_score": 9999,
+	"dmnd_score": 999,
+	"gold_score": 99,
+	"slvr_score": 9,
+	"next_level": ""
 };
 
 
@@ -83,6 +84,18 @@ func get_skybox(level:String)->ImageTexture:
 	return GDPatch.get_mod("customspheres").custom_levels[level].get('skybox', null);
 
 
+func get_nextlevel(level:String)->String:
+	return GDPatch.get_mod("customspheres").custom_levels[level].get('next_level', '');
+
+
+func get_chapter_end(level:String)->String:
+	return GDPatch.get_mod("customspheres").custom_levels[level].get('chapter_end', false);
+
+
+func get_icon(level:String)->ImageTexture:
+	return GDPatch.get_mod("customspheres").custom_levels[level].get('icon', load("res://Assets/UI/LevelIcons/bonus_icon.png"));
+
+
 func load_skybox(level:String)->ImageTexture:
 	var _path: String = level_directory.path_join(level);
 
@@ -113,7 +126,7 @@ func load_config(level:String)->Dictionary:
 	var _json_decoded: Dictionary = JSON.parse_string(_contents);
 
 	if _json_decoded is Dictionary:
-		return _json_decoded;
+		return _json_decoded.merged(DEFAULT_LVL_CFG);
 
 	return DEFAULT_LVL_CFG.duplicate();
 
@@ -159,8 +172,9 @@ func load_custom_levels()->void:
 					var _try_load: PackedScene = ResourceLoader.load(_full_scene_path);
 
 					if _try_load != null:
-						custom_levels[_sub_dir] = load_config(_folder_path, _sub_dir);
-						custom_levels[_sub_dir]["intromusic"] = load_sound(_folder_path.path_join("intro.ogg"));##music 
+						custom_levels[_sub_dir] = load_config(_sub_dir);
+						custom_levels[_sub_dir]["icon"] = load_icon(_sub_dir); 
+						custom_levels[_sub_dir]["intromusic"] = load_sound(_folder_path.path_join("intro.ogg"));
 						custom_levels[_sub_dir]["levelmusic"] = load_sound(_folder_path.path_join("main.ogg"));
 						custom_levels[_sub_dir]["ambience"] = load_sound(_folder_path.path_join("ambience.ogg"));
 						custom_levels[_sub_dir]["skybox"] = load_skybox(_sub_dir);
@@ -191,7 +205,7 @@ func compile_map(path:String)->void:##ITS ALL A MESS!!!!
 	var _packed = _scene.pack(func_godot_map);
 	var _level_dir_path: String = level_directory.path_join(path);
 	var _level_scene_path: String = _level_dir_path.path_join(path + ".scn");
-	var _level_cfg_path: String = _level_dir_path.path_join(path + ".cfg");
+	var _level_cfg_path: String = _level_dir_path.path_join("config.cfg");
 
 	if !DirAccess.dir_exists_absolute(_level_dir_path):
 		DirAccess.make_dir_absolute(_level_dir_path);

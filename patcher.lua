@@ -104,6 +104,30 @@ GDPatch.patch_script_as_text("Scripts/System/global.gdc", function(ctx, src)
 	return src
 end)
 
+-- Patch nextlevel
+GDPatch.patch_script_as_text("Scripts/System/global.gdc", function(ctx, src)
+	src = src:gsub(
+		utils.escape([[func _nextlevel():]]),
+		[[%0
+	if GDPatch.get_mod("customspheres").custom_levels.has(global.currentlevel):
+		var _next_level: String = GDPatch.get_mod("customspheres").get_nextlevel(global.currentlevel)
+
+		Audio.music_resume()
+		Audio.music_resume2()
+		Audio.music_stop()
+		Audio.reverb_trigger = 0
+		Audio.music_mult = 0.0
+		Audio._lowpass_slow()
+		
+		global.showdeploying = false
+		global._setlevel(_next_level,false)
+		return
+	]]
+	)
+	return src
+end)
+
+
 -- patch ship screen
 GDPatch.patch_script_as_text("Scripts/UI/ship_screen.gdc", function(ctx, src)
 	src = src:gsub(
@@ -149,6 +173,54 @@ GDPatch.patch_script_as_text("Scripts/FX/world_environment.gdc", function(ctx, s
 		_amb.volume_linear = 1.0;
 		_amb.play();
 	]]
+	)
+	return src
+end)
+
+-- patch lvl complete screen
+GDPatch.patch_script_as_text("Scripts/UI/level_complete.gdc", function(ctx, src)
+	src = src:gsub(
+		utils.escape([[func _leaderboardstart(board, ldrpts):]]),
+		[[%0
+	if GDPatch.get_mod("customspheres").custom_levels.has(global.currentlevel):
+		if !GDPatch.get_mod("customspheres").get_nextlevel(global.currentlevel).is_empty():
+			$LevelCompleteUI/HBoxContainer/cont.show()
+	]]
+	)
+	return src
+end)
+
+-- patch deploy screen
+GDPatch.patch_script_as_text("Scripts/UI/deploy_screen.gdc", function(ctx, src)
+	src = src:gsub(
+		utils.escape([[func _ready() -> void :]]),
+		[[%0
+	if GDPatch.get_mod("customspheres").custom_levels.has(global.currentlevel):
+		if !GDPatch.get_mod("customspheres").get_nextlevel(global.currentlevel).is_empty():
+			$TextureRect2/bar.color = Color("ffffffff")
+			Audio.sound_play_ui(Audio.sndDeployClick)
+			if saves.skin_portrait == 0:
+				$TextureRect2/port.texture = _fawn1	
+			if saves.skin_portrait == 1:
+				$TextureRect2/port.texture = _fawn2
+			$ColorRect/Lvl.text = GDPatch.get_mod("customspheres").custom_levels.get(global.currentlevel).title
+			$ColorRect/Lvl2.text = GDPatch.get_mod("customspheres").custom_levels.get(global.currentlevel).pretitle
+
+			var _next: String = GDPatch.get_mod("customspheres").get_nextlevel(global.currentlevel)
+			$ColorRect4/Lvl.text = GDPatch.get_mod("customspheres").custom_levels.get(_next).title
+			$ColorRect4/Lvl2.text = GDPatch.get_mod("customspheres").custom_levels.get(_next).pretitle
+
+			$bg2/LevelText.text = "CUSTOM"
+			$bg2/worldtext.text = ""
+			$firstsquare/TextureRect.texture = GDPatch.get_mod("customspheres").get_icon(global.currentlevel)
+			$"2ndsquare/TextureRect3".texture = GDPatch.get_mod("customspheres").get_icon(_next)
+			$AudioStreamPlayer2.stream = _deployingmus
+			$AudioStreamPlayer2.play()
+			$AnimationPlayer.play("Start")
+			$AnimationPlayer2.play("loop")
+			$DidYouKnowText.text = global._get_random_hint()
+			return
+		]]
 	)
 	return src
 end)
