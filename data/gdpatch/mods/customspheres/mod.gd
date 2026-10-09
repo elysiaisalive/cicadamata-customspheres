@@ -92,7 +92,7 @@ func load_skybox(level:String)->ImageTexture:
 func load_thumbnail(level:String)->ImageTexture:
 	var _path: String = level_directory.path_join(level);
 
-	return load_texture(_path.path_join(level + ".png"));
+	return load_texture(_path.path_join("thumbnail.png"));
 
 
 func load_icon(level:String)->ImageTexture:
@@ -101,8 +101,9 @@ func load_icon(level:String)->ImageTexture:
 	return load_texture(_path.path_join("icon.png"));
 
 
-func load_config(dir:String, fname:String)->Dictionary:
-	var _path: String = dir.path_join(fname) + ".cfg";
+func load_config(level:String)->Dictionary:
+	var _dir: String = level_directory.path_join(level);
+	var _path: String = _dir.path_join("config.cfg");
 
 	if !FileAccess.file_exists(_path): 
 		return DEFAULT_LVL_CFG.duplicate();
@@ -159,8 +160,8 @@ func load_custom_levels()->void:
 
 					if _try_load != null:
 						custom_levels[_sub_dir] = load_config(_folder_path, _sub_dir);
-						custom_levels[_sub_dir]["intromusic"] = load_sound(_folder_path.path_join(_sub_dir + "_intro.ogg"));##music 
-						custom_levels[_sub_dir]["levelmusic"] = load_sound(_folder_path.path_join(_sub_dir + "_main.ogg"));
+						custom_levels[_sub_dir]["intromusic"] = load_sound(_folder_path.path_join("intro.ogg"));##music 
+						custom_levels[_sub_dir]["levelmusic"] = load_sound(_folder_path.path_join("main.ogg"));
 						custom_levels[_sub_dir]["ambience"] = load_sound(_folder_path.path_join("ambience.ogg"));
 						custom_levels[_sub_dir]["skybox"] = load_skybox(_sub_dir);
 						custom_levels[_sub_dir]["path"] = _full_scene_path;
