@@ -67,12 +67,20 @@ func get_shipscreen(level:String)->String:
 	});
 
 
+func get_ambience(level:String)->AudioStream:
+	return GDPatch.get_mod("customspheres").custom_levels[level].get('ambience', load("res://Assets/Sounds/Ambiance/amb_w1.wav"));
+
+
 func get_intromusic(level:String)->AudioStream:
 	return GDPatch.get_mod("customspheres").custom_levels[level].get('intromusic', Audio.mscWorld1_Intro);
 
 
 func get_mainmusic(level:String)->AudioStream:
 	return GDPatch.get_mod("customspheres").custom_levels[level].get('mainmusic', Audio.mscWorld1_Main);
+
+
+func get_skybox(level:String)->ImageTexture:
+	return GDPatch.get_mod("customspheres").custom_levels[level].get('skybox', null);
 
 
 func load_skybox(level:String)->ImageTexture:
@@ -115,6 +123,11 @@ func load_music(path:String)->AudioStreamOggVorbis:
 	return _music;	
 
 
+func load_ambience(path:String)->AudioStreamWAV:
+	var _amb: AudioStreamWAV = AudioStreamWAV.load_from_file(path);
+	return _amb;
+
+
 func load_texture(path:String)->ImageTexture:
 	if !FileAccess.file_exists(path): 
 		return null;
@@ -153,11 +166,14 @@ func load_custom_levels()->void:
 						custom_levels[_sub_dir] = load_config(_folder_path, _sub_dir);
 						custom_levels[_sub_dir]["intromusic"] = load_music(_folder_path.path_join(_sub_dir + "_intro.ogg"));##music 
 						custom_levels[_sub_dir]["levelmusic"] = load_music(_folder_path.path_join(_sub_dir + "_main.ogg"));
+						custom_levels[_sub_dir]["ambience"] = load_ambience(_folder_path.path_join("ambience.wav"));
+						custom_levels[_sub_dir]["skybox"] = load_skybox(_sub_dir);
 						custom_levels[_sub_dir]["path"] = _full_scene_path;
 
 			_sub_dir = _main_dir.get_next();
 			
 		_main_dir.list_dir_end();
+		print(custom_levels)
 
 
 func get_autoload(autoload:String)->Node:

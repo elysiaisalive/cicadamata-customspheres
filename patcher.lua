@@ -133,3 +133,21 @@ GDPatch.patch_script_as_text("Scripts/Player/Player2.gdc", function(ctx, src)
 	)
 	return src
 end)
+
+-- patch env
+GDPatch.patch_script_as_text("Scripts/FX/world_environment.gdc", function(ctx, src)
+	src = src:gsub(
+		utils.escape([[func _ready() -> void :]]),
+		[[%0
+	if GDPatch.get_mod("customspheres").custom_levels.has(global.currentlevel):
+		var _skybox: ImageTexture = GDPatch.get_mod("customspheres").get_skybox(global.currentlevel);
+		if _skybox != null: self.get_environment().sky.sky_material.panorama = _skybox;
+
+		var _amb: AudioStreamPlayer = self.find_child("amb");
+		var _amb_sfx: AudioStream = GDPatch.get_mod("customspheres").get_ambience(global.currentlevel);
+		_amb.stream = _amb_sfx;
+		_amb.play();
+	]]
+	)
+	return src
+end)
