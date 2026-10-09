@@ -27,11 +27,16 @@ For more information on mapping for trenchbroom, refer to the [official document
 
 Once you run the compile tools, the mod will autogenerate a scene file and a config file located under `CICADAMATA/GDPatch/mods/customspheres/levels/mycustomlevel`.
 
+
+### Customizing your level
+#### Custom Images
 You can provide custom icons and thumbnails for levels by adding an `icon.png` and a `thumbnail.png`.
 It is recommended to keep icons at 9x9, and thumbnails at 84x69 to keep consistency with the games style.
 All custom level assets besides `icon.png` must match the name of the level/containing folder, otherwise they will not load.
-
+#### Custom Music
 To add custom music to your level you must add an `intro.ogg` and `main.ogg`.
+#### Custom Skybox and Ambience
+Levels can also have a custom ambient track and skybox by adding respective `ambience.ogg` and `skybox.png` textures.
 
 ### Level Design Tips/Considerations
 - Keep grid size at 32x for most main level geometry.
