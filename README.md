@@ -5,7 +5,7 @@ PROVIDES ACCESS TO USER GENERATED SPHERES
 1. Install [GDPatch](https://gdpatch.dev/)
 2. [Download this repo as a .zip](https://github.com/elysiaisalive/cicadamata-customspheres/archive/refs/heads/master.zip)
 3. Unzip the mod into your mods folder located in (`GDPatch/mods/customspheres`)
-4. You may now view freely.
+4. You can now play custom levels!
 
 ## + BASIC USAGE"
 The mod loads custom levels located in `GDPatch/mods/customspheres/levels`.
