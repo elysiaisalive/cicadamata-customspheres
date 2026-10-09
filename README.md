@@ -32,7 +32,6 @@ Once you run the compile tools, the mod will autogenerate a scene file and a con
 #### Custom Images
 You can provide custom icons and thumbnails for levels by adding an `icon.png` and a `thumbnail.png`.
 It is recommended to keep icons at 9x9, and thumbnails at 84x69 to keep consistency with the games style.
-All custom level assets besides `icon.png` must match the name of the level/containing folder, otherwise they will not load.
 #### Custom Music
 To add custom music to your level you must add an `intro.ogg` and `main.ogg`.
 #### Custom Skybox and Ambience
