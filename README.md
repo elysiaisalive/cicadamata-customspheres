@@ -30,7 +30,7 @@ For more information on mapping for trenchbroom, refer to the [official document
 - navigate to `Run > Compile Map`
 - change the 'Run Tool path to your game executable (`steam/steamapps/common/CICADAMATA/CICADAMATA.exe`)
 - set parameters to `run_map::${MAP_DIR_PATH}/${MAP_FULL_NAME}::${MAP_BASE_NAME}`
-- you can now run the compile tools and a new custom map will be created in `GDPatch/mods/customspheres/levels`!
+- you can now run the compile tools and start testing your new map!
 
 Once you run the compile tools, the mod will autogenerate a scene file and a config file located under `CICADAMATA/GDPatch/mods/customspheres/levels/mycustomlevel`.
 
