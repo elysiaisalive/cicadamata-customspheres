@@ -20,6 +20,11 @@ For a guide to get started, read [here](https://github/ccdamappingtutorial).
 Once you have the FGD and Trenchbroom downloaded, drop the Game Config in `AppData/Roaming/TrenchBroom/games/Cicadamata`.
 For more information on mapping for trenchbroom, refer to the [official documentation](https://trenchbroom.github.io/manual/latest/)
 
+### Creating levels
+- use GDRE tools to decompile and extract the textures from the game.
+- it is highly suggested you create some sort of folder `Cicada_FGD` and place the textures inside
+- set your game path to your FGD folder in trenchbroom under View > Preferences > Cicadamata > Game Path
+
 Once you run the compile tools, the mod will autogenerate a scene file and a config file located under `CICADAMATA/GDPatch/mods/customspheres/levels/mycustomlevel`.
 
 You can provide custom icons and thumbnails for levels by adding an `icon.png` and a `mycustomlevelname.png`.

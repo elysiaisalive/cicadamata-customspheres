@@ -9,6 +9,7 @@ var __compile_level_path: String;
 
 const DEFAULT_LVL_CFG: Dictionary = {
 	"author": "DEMETER",
+	"world_title": "CUSTOM",
 	"pretitle": "CUSTOM",
 	"title": "Custom Level",
 	"transition": "whats mine is yours,\n\t\tand what's yours is mine",

@@ -211,7 +211,7 @@ GDPatch.patch_script_as_text("Scripts/UI/deploy_screen.gdc", function(ctx, src)
 			$ColorRect4/Lvl2.text = GDPatch.get_mod("customspheres").custom_levels.get(_next).pretitle
 
 			$bg2/LevelText.text = "CUSTOM"
-			$bg2/worldtext.text = ""
+			$bg2/worldtext.text = GDPatch.get_mod("customspheres").custom_levels.get(global.currentlevel).world_title
 			$firstsquare/TextureRect.texture = GDPatch.get_mod("customspheres").get_icon(global.currentlevel)
 			$"2ndsquare/TextureRect3".texture = GDPatch.get_mod("customspheres").get_icon(_next)
 			$AudioStreamPlayer2.stream = _deployingmus
