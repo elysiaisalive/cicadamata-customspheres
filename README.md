@@ -9,7 +9,7 @@ PROVIDES ACCESS TO USER GENERATED SPHERES
 
 ## + BASIC USAGE"
 The mod loads custom levels located in `GDPatch/mods/customspheres/levels`.
-Levels must have a valid scene file and config file created by the [compiler tools](https://thisisavalidlinkokyes)
+Levels must have a valid scene file created by the compiler tools.
 
 ## + QUICKSTART
 To create a custom level, you will need the [CICADAMATA FGD](https://github.com/elysiaisalive/cicadamata-fgd), and [Trenchbroom 2025.4+](https://github.com/TrenchBroom/TrenchBroom/releases#release-v2025.4)
@@ -34,16 +34,16 @@ Once you run the compile tools, the mod will autogenerate a scene file and a con
 ### + Customizing your level
 #### Custom Images
 You can provide custom icons and thumbnails for levels by adding an `icon.png` and a `thumbnail.png`.
-It is recommended to keep icons at 9x9, and thumbnails at 84x69 to keep consistency with the games style.
+It is recommended to keep icons at `9x9`, and thumbnails at `84x69` to keep consistency with the games style.
 #### Custom Music
 To add custom music to your level you must add an `intro.ogg` and `main.ogg`.
 #### Custom Skybox and Ambience
 Levels can also have a custom ambient track and skybox by adding respective `ambience.ogg` and `skybox.png`.
-Skyboxes are recommended to be authored at 2048x1024 and then rescaled to 1024x1024 for the final texture.
+Skyboxes are recommended to be authored at `2048x1024` and then rescaled to `1024x1024 for the final texture.
 
 ### + Level Design Tips/Considerations
-- Keep grid size at 32x for most main level geometry.
-- Keep func_spikes at maximum heights of 16-32 Units.
+- Keep grid size at `32x` for most main level geometry.
+- Keep func_spikes at a maximum of `16-32` units tall.
 - Create all brushes with __tb_empty, apply textures to all visible brush faces, and then replace all instances of __tb_empty with the 'skip' texture. This workflow makes it much easier to optimize geometry and unseen faces.
 
 #### + Caveats // TBD
