@@ -40,7 +40,7 @@ Levels can also have a custom ambient track and skybox by adding respective `amb
 ### Level Design Tips/Considerations
 - Keep grid size at 32x for most main level geometry.
 - Keep func_spikes at maximum heights of 16-32 Units.
-- Create all brushes with __tb_empty, apply textures and then replace all instances of __tb_empty with the 'skip' texture. This workflow makes it much easier to optimize geometry and unseen faces.
+- Create all brushes with __tb_empty, apply textures to all visible brush faces, and then replace all instances of __tb_empty with the 'skip' texture. This workflow makes it much easier to optimize geometry and unseen faces.
 
 
 ### ACCESS USER CONTENT AT YOUR OWN RISK.
