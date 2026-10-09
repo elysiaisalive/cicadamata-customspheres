@@ -124,7 +124,7 @@ func load_music(path:String)->AudioStreamOggVorbis:
 
 
 func load_ambience(path:String)->AudioStreamWAV:
-	var _amb: AudioStreamWAV = AudioStreamWAV.load_from_file(path);
+	var _amb: AudioStreamWAV = AudioStreamWAV.load_from_file(path, {"edit/loop_mode": AudioStreamWAV.LOOP_FORWARD});
 	return _amb;
 
 
