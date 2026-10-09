@@ -117,15 +117,10 @@ func load_config(dir:String, fname:String)->Dictionary:
 	return DEFAULT_LVL_CFG.duplicate();
 
 
-func load_music(path:String)->AudioStreamOggVorbis:
+func load_sound(path:String)->AudioStreamOggVorbis:
 	var _music: AudioStreamOggVorbis = AudioStreamOggVorbis.load_from_file(path);
 	_music.loop = true;
-	return _music;	
-
-
-func load_ambience(path:String)->AudioStreamWAV:
-	var _amb: AudioStreamWAV = AudioStreamWAV.load_from_file(path, {"edit/loop_mode": AudioStreamWAV.LOOP_FORWARD});
-	return _amb;
+	return _music;
 
 
 func load_texture(path:String)->ImageTexture:
@@ -164,9 +159,9 @@ func load_custom_levels()->void:
 
 					if _try_load != null:
 						custom_levels[_sub_dir] = load_config(_folder_path, _sub_dir);
-						custom_levels[_sub_dir]["intromusic"] = load_music(_folder_path.path_join(_sub_dir + "_intro.ogg"));##music 
-						custom_levels[_sub_dir]["levelmusic"] = load_music(_folder_path.path_join(_sub_dir + "_main.ogg"));
-						custom_levels[_sub_dir]["ambience"] = load_ambience(_folder_path.path_join("ambience.wav"));
+						custom_levels[_sub_dir]["intromusic"] = load_sound(_folder_path.path_join(_sub_dir + "_intro.ogg"));##music 
+						custom_levels[_sub_dir]["levelmusic"] = load_sound(_folder_path.path_join(_sub_dir + "_main.ogg"));
+						custom_levels[_sub_dir]["ambience"] = load_sound(_folder_path.path_join("ambience.ogg"));
 						custom_levels[_sub_dir]["skybox"] = load_skybox(_sub_dir);
 						custom_levels[_sub_dir]["path"] = _full_scene_path;
 

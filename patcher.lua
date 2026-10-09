@@ -146,6 +146,7 @@ GDPatch.patch_script_as_text("Scripts/FX/world_environment.gdc", function(ctx, s
 		var _amb: AudioStreamPlayer = self.find_child("amb");
 		var _amb_sfx: AudioStream = GDPatch.get_mod("customspheres").get_ambience(global.currentlevel);
 		_amb.stream = _amb_sfx;
+		_amb.volume_linear = 1.0;
 		_amb.play();
 	]]
 	)
