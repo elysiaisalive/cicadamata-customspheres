@@ -20,11 +20,17 @@ For a guide to get started, read [here](https://github/ccdamappingtutorial).
 Once you have the FGD and Trenchbroom downloaded, drop the Game Config in `AppData/Roaming/TrenchBroom/games/Cicadamata`.
 For more information on mapping for trenchbroom, refer to the [official documentation](https://trenchbroom.github.io/manual/latest/)
 
-- use [GDRE Tools](https://github.com/GDRETools/gdsdecomp) or [PCKExplorer](https://github.com/DmitriySalnikov/GodotPCKExplorer) to decompile and extract the textures from the game.
+- use [GDRE Tools](https://github.com/GDRETools/gdsdecomp) or [PCKExplorer](https://github.com/DmitriySalnikov/GodotPCKExplorer) to decompile and extract necessary resources from the game.
 - Extract the textures located under `FuncGodot/textures`
 - For optional editor display of mapping entities, extract the models located under `FuncGodot/models`
 - it is highly suggested you create some sort of folder called `CicadamataFGD` and place the textures and models inside
-- set your game path to your FGD folder in Trenchbroom under View > Preferences > Cicadamata > Game Path
+- set your game path to your FGD folder in Trenchbroom under `View > Preferences > Cicadamata > Game Path`
+
+#### + Setting up compiler tools
+- navigate to `Run > Compile Map`
+- change the 'Run Tool path to your game executable (`steam/steamapps/common/CICADAMATA/CICADAMATA.exe`)
+- set parameters to `run_map::${MAP_DIR_PATH}/${MAP_FULL_NAME}::${MAP_BASE_NAME}`
+- you can now run the compile tools and a new custom map will be created in `GDPatch/mods/customspheres/levels`!
 
 Once you run the compile tools, the mod will autogenerate a scene file and a config file located under `CICADAMATA/GDPatch/mods/customspheres/levels/mycustomlevel`.
 
