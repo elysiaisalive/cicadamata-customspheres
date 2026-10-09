@@ -12,9 +12,11 @@ The mod loads custom levels located in `GDPatch/mods/customspheres/levels`.
 Levels must have a valid scene file created by the compiler tools.
 
 ## + QUICKSTART
-To create a custom level, you will need the [CICADAMATA FGD](https://github.com/elysiaisalive/cicadamata-fgd), and [Trenchbroom 2025.4+](https://github.com/TrenchBroom/TrenchBroom/releases#release-v2025.4)
+To create a custom level, you will need the **CICADAMATA FGD**, and [Trenchbroom 2025.4+](https://github.com/TrenchBroom/TrenchBroom/releases#release-v2025.4)
 
-Once you have the FGD and Trenchbroom downloaded, extract the contents to `AppData/Roaming/TrenchBroom/games/Cicadamata`.
+This mod ships with an FGD preconfigured for the game (`CCDA_FGD.zip`)
+Once you have the FGD and Trenchbroom downloaded, extract the contents of the FGD to `AppData/Roaming/TrenchBroom/games/Cicadamata`.
+
 For more information on mapping for trenchbroom, refer to the [official documentation](https://trenchbroom.github.io/manual/latest/)
 #### + Setting up Trenchbroom
 1. Use [GDRE Tools](https://github.com/GDRETools/gdsdecomp) or [PCKExplorer](https://github.com/DmitriySalnikov/GodotPCKExplorer) to decompile and extract necessary resources from the game.
@@ -29,9 +31,23 @@ For more information on mapping for trenchbroom, refer to the [official document
 3. Set parameters to `run_map::${MAP_DIR_PATH}/${MAP_FULL_NAME}::${MAP_BASE_NAME}`
 4. You can now run the compile tools and start testing your new map!
 
-Once you run the compile tools, the mod will autogenerate a scene file and a config file located under `CICADAMATA/GDPatch/mods/customspheres/levels/mycustomlevel`.
+Once you run the compile tools, the mod will autogenerate a scene file and a config file located under `CICADAMATA/GDPatch/mods/customspheres/levels/mycustomlevel`
 
 ### + Customizing your level
+#### Config Properties
+|key|value|description|
+|:-:|
+|author|string|It's you.
+|conditions|string|Conditions on the dropship screen
+|location|string|Location on the dropship screen
+|warning|string|Warning on the dropship screen
+|pretitle|string|The name of the sphere
+|title|string|The name of the level
+|transition|string|Short blurb that appears during level transitions
+|next_level|string|The name of the next level to deploy into. Must be a valid level inside `GDPatch/mods/customspheres/levels`
+|world_colour|string|Must be a valid color hexcode. Changes the color as seen on the pause menu, and other UI elements
+|world_title|string|The name of the world as seen on the deploy screen and other UI elements
+
 #### Custom Images
 You can provide custom icons and thumbnails for levels by adding an `icon.png` and a `thumbnail.png`.
 It is recommended to keep icons at `9x9`, and thumbnails at `84x69` to keep consistency with the games style.
