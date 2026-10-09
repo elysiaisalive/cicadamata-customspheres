@@ -37,16 +37,16 @@ Once you run the compile tools, the mod will autogenerate a scene file and a con
 #### Config Properties
 |key|value|description|
 |:-:|
-|author|string|It's you.
-|conditions|string|Conditions on the dropship screen
-|location|string|Location on the dropship screen
-|warning|string|Warning on the dropship screen
-|pretitle|string|The name of the sphere
-|title|string|The name of the level
-|transition|string|Short blurb that appears during level transitions
-|next_level|string|The name of the next level to deploy into. Must be a valid level inside `GDPatch/mods/customspheres/levels`
-|world_colour|string|Must be a valid color hexcode. Changes the color as seen on the pause menu, and other UI elements
-|world_title|string|The name of the world as seen on the deploy screen and other UI elements
+| author |string | It's you. |
+| conditions | string | Conditions on the dropship screen |
+| location | string | Location on the dropship screen |
+| warning | string | Warning on the dropship screen
+| pretitle | string | The name of the sphere
+| title | string | The name of the level
+| transition | string| Short blurb that appears during level transitions
+| next_level | string| The name of the next level to deploy into. Must be a valid level inside `GDPatch/mods/customspheres/levels`
+| world_colour | string | Must be a valid color hexcode. Changes the color as seen on the pause menu, and other UI elements
+| world_title | string | The name of the world as seen on the deploy screen and other UI elements
 
 #### Custom Images
 You can provide custom icons and thumbnails for levels by adding an `icon.png` and a `thumbnail.png`.
