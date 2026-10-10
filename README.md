@@ -41,7 +41,7 @@ Once you run the compile tools, the mod will autogenerate a scene file and a con
 | world_title | string | The name of the world as seen on the deploy screen and other UI elements
 | world_colour | string | Must be a valid colour hexcode. Changes the color as seen on the pause menu, and other UI elements
 | world_light_colour | string | Must be a valid colour hexcode. Changes the levels sun color
-| music_override | string | Useful for level packs. Points to another levels song to use as the levels music
+| music_override | string | Useful for level packs. Points to another levels song to use instead of providing `intro.ogg` or `main.ogg` files
 | pretitle | string | The name of the sphere
 | title | string | The name of the level
 | transition | string | Short blurb that appears during level transitions
