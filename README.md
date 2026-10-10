@@ -38,16 +38,17 @@ Once you run the compile tools, the mod will autogenerate a scene file and a con
 | key | value | description |
 | :-: | :-: | :-- |
 | author |string | It's you. |
-| conditions | string | Conditions on the dropship screen |
-| location | string | Location on the dropship screen |
-| warning | string | Warning on the dropship screen
+| world_title | string | The name of the world as seen on the deploy screen and other UI elements
+| world_colour | string | Must be a valid colour hexcode. Changes the color as seen on the pause menu, and other UI elements
+| world_light_colour | string | Must be a valid colour hexcode. Changes the levels sun color
+| music_override | string | Useful for level packs. Points to another levels song to use as the levels music
 | pretitle | string | The name of the sphere
 | title | string | The name of the level
-| transition | string| Short blurb that appears during level transitions
+| transition | string | Short blurb that appears during level transitions
+| location | string | Location on the dropship screen |
+| conditions | string | Conditions on the dropship screen |
+| warning | string | Warning on the dropship screen |
 | next_level | string| The name of the next level to deploy into. Must be a valid level inside `GDPatch/mods/customspheres/levels`
-| world_colour | string | Must be a valid color hexcode. Changes the color as seen on the pause menu, and other UI elements
-| world_light_colour | string | Must be a valid color hexcode. Changes the levels sun color
-| world_title | string | The name of the world as seen on the deploy screen and other UI elements
 
 #### Custom Images
 You can provide custom icons and thumbnails for levels by adding an `icon.png` and a `thumbnail.png`.
