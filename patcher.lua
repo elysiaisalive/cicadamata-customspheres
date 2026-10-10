@@ -159,6 +159,10 @@ GDPatch.patch_script_as_text("Scripts/FX/world_environment.gdc", function(ctx, s
 		var _skybox: ImageTexture = GDPatch.get_mod("customspheres").get_skybox(global.currentlevel);
 		if _skybox != null: self.get_environment().sky.sky_material.panorama = _skybox;
 
+		var _col: Color = GDPatch.get_mod("customspheres").get_world_light_colour(global.currentlevel);
+		var _sun: DirectionalLight3D = self.find_child("DirectionalLight3D");
+		_sun.light_color = _col;
+
 		var _amb: AudioStreamPlayer = self.find_child("amb");
 		var _amb_sfx: AudioStream = GDPatch.get_mod("customspheres").get_ambience(global.currentlevel);
 		_amb.stream = _amb_sfx;

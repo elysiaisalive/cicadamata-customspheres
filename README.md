@@ -46,6 +46,7 @@ Once you run the compile tools, the mod will autogenerate a scene file and a con
 | transition | string| Short blurb that appears during level transitions
 | next_level | string| The name of the next level to deploy into. Must be a valid level inside `GDPatch/mods/customspheres/levels`
 | world_colour | string | Must be a valid color hexcode. Changes the color as seen on the pause menu, and other UI elements
+| world_light_colour | string | Must be a valid color hexcode. Changes the levels sun color
 | world_title | string | The name of the world as seen on the deploy screen and other UI elements
 
 #### Custom Images

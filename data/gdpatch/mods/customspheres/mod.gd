@@ -11,6 +11,7 @@ const DEFAULT_LVL_CFG: Dictionary = {
 	"author": "DEMETER",
 	"world_title": "CUSTOM",
 	"world_colour": "FFFFFF",
+	"world_light_colour": "FFFFFF",
 	"pretitle": "CUSTOM",
 	"title": "Custom Level",
 	"transition": "whats mine is yours,\n\t\tand what's yours is mine",
@@ -74,6 +75,12 @@ func get_shipscreen(level:String)->String:
 
 func get_worldcolour(level:String)->Color:
 	var _worldcol: String = GDPatch.get_mod("customspheres").custom_levels[level].get('world_colour', DEFAULT_LVL_CFG.world_colour);
+	var _col: Color = Color.html(_worldcol) if Color.html_is_valid(_worldcol) else Color.WHITE;
+	return _col;
+
+
+func get_world_light_colour(level:String)->Color:
+	var _worldcol: String = GDPatch.get_mod("customspheres").custom_levels[level].get('world_light_colour', DEFAULT_LVL_CFG.world_colour);
 	var _col: Color = Color.html(_worldcol) if Color.html_is_valid(_worldcol) else Color.WHITE;
 	return _col;
 
