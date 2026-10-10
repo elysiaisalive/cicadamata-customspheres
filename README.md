@@ -14,8 +14,8 @@ Levels must have a valid scene file created by the compiler tools.
 ## + QUICKSTART
 To create a custom level, you will need the **CICADAMATA FGD**, and [Trenchbroom 2025.4+](https://github.com/TrenchBroom/TrenchBroom/releases#release-v2025.4)
 
-This mod ships with an FGD preconfigured for the game (`CCDA_FGD.zip`)
-Once you have the FGD and Trenchbroom downloaded, extract the contents of the FGD to `AppData/Roaming/TrenchBroom/games/Cicadamata`.
+This mod ships with an FGD preconfigured for the game (`/ccda_fgd/`)
+Once you have the FGD and Trenchbroom downloaded, copy the contents of the FGD to `AppData/Roaming/TrenchBroom/games/Cicadamata`.
 
 For more information on mapping for trenchbroom, refer to the [official documentation](https://trenchbroom.github.io/manual/latest/)
 #### + Setting up Trenchbroom

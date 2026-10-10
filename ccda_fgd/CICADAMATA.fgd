@@ -1,0 +1,156 @@
+@PointClass color(8 52 204) size(-8.0 -8.0 -8.0, 8.0 8.0 8.0) = ENV_CUSTOM : "the environment" 
+[
+	skybox_path(string) : "" : ""
+]
+
+@PointClass color(8 52 204) size(-8.0 -8.0 -8.0, 8.0 8.0 8.0) = ENV_RAIN : "the environment" []
+
+@PointClass color(8 52 204) size(-8.0 -8.0 -8.0, 8.0 8.0 8.0) = ENV_WORLD1 : "the environment" []
+
+@PointClass color(8 52 204) size(-8.0 -8.0 -8.0, 8.0 8.0 8.0) = ENV_WORLD2 : "the environment" []
+
+@PointClass color(8 52 204) size(-8.0 -8.0 -8.0, 8.0 8.0 8.0) = ENV_WORLD3 : "the environment" []
+
+@PointClass color(8 52 204) size(-8.0 -8.0 -8.0, 8.0 8.0 8.0) = ENV_WORLD4 : "the environment" []
+
+@PointClass color(8 52 204) size(-8.0 -8.0 -8.0, 8.0 8.0 8.0) = ENV_WORLD5 : "the environment" []
+
+@PointClass color(8 52 204) size(-8.0 -8.0 -8.0, 8.0 8.0 8.0) = ENV_WORLD6 : "the environment" []
+
+@SolidClass color(204 204 204) = func_camerascreen : "CAMARA" []
+
+@SolidClass color(204 204 204) = func_fizzer : "Fizzy like cola! Or other soft drink" []
+
+@SolidClass color(204 204 204) base(Phong, VertexMergeDistance, CullInteriorFaces) = func_glass : "tthe glasser" []
+
+@SolidClass color(204 204 204) = func_lava : "buring..." []
+
+@SolidClass color(204 204 204) = func_movingplatform : "func_movingplatform" 
+[
+	direction(string) : "" : "0.0 1.0 0.0"
+	distance(float) : "" : "32.0"
+	pause(float) : "" : "0.7"
+	start_delay(float) : "" : "-1.0"
+	time(float) : "" : "2.0"
+]
+
+@SolidClass color(204 204 204) base(Phong, VertexMergeDistance, CullInteriorFaces) = func_rotating : "the rotator" 
+[
+	invert_rotation(choices) : "" : 0 = 
+	[
+		0 : "No"
+		1 : "Yes"
+	]
+	speed(float) : "" : "0.0"
+	speed_vec(string) : "" : "0.0 0.0 0.0"
+]
+
+@SolidClass color(204 204 204) base(Phong, VertexMergeDistance, CullInteriorFaces) = func_rotating_illusionary : "the rotator" 
+[
+	invert_rotation(choices) : "" : 0 = 
+	[
+		0 : "No"
+		1 : "Yes"
+	]
+	speed(float) : "" : "0.0"
+	speed_vec(string) : "" : "0.0 0.0 0.0"
+]
+
+@SolidClass color(204 204 204) base(Phong, VertexMergeDistance, CullInteriorFaces) = func_scroll : "the scroller" 
+[
+	x_scroll(float) : "" : "0.0"
+	y_scroll(float) : "" : "0.0"
+]
+
+@SolidClass color(204 204 204) = func_spike : "Ouchie ouchie!" []
+
+@SolidClass color(204 204 204) = func_water : "WATA" []
+@PointClass color(204 201 0) model({ "path": "models/core.glb", "scale": 64 }) size(-8.0 -20.0 -8.0, 8.0 16.0 8.0) = CORE : "core" []
+
+@PointClass color(0 220 225) size(-8.0 -20.0 -8.0, 8.0 16.0 8.0) = EXIT : "exit" []
+
+@PointClass color(222 189 105) model({ "path": "models/fan.glb", "scale": 32 }) size(-8.0 -20.0 -8.0, 8.0 8.0 8.0) = FAN : "fa,n" []
+
+@PointClass size(-8.0 -8.0 -8.0, 8.0 8.0 8.0) color(14 212 229) model({ "path": "models/glass.glb", "scale": 64 }) = GLASS : "shatter sound" 
+[
+	angles(string) : "" : "0.0 0.0 0.0"
+]
+
+@PointClass color(204 201 0) size(-8.0 -20.0 -8.0, 8.0 16.0 8.0) model({ "path": "models/heal.glb", "scale": 32 }) = HEAL : "heal" []
+
+@PointClass color(204 204 204) model({"path": "player.glb", "scale": 48 }) size(-8.0 -8.0 -8.0, 8.0 8.0 8.0) = player : "spawns an unarmed player" []
+
+@PointClass color(204 204 204) model({ "path": "models/ring.glb", "scale": 32 }) size(-8.0 -8.0 -8.0, 8.0 8.0 8.0) = RING : "		ring
+ring			ring
+		ring " 
+[
+	mangle(string) : "" : "0.0 0.0 0.0"
+]
+
+@PointClass color(207 184 214) size(-8.0 -20.0 -8.0, 8.0 8.0 8.0) = SPRING : "jume" 
+[
+	velocity_x(float) : "" : "0.0"
+	velocity_y(float) : "" : "0.0"
+	velocity_z(float) : "" : "0.0"
+]
+
+@PointClass color(204 201 0) size(-8.0 -20.0 -8.0, 8.0 16.0 8.0) model({ "path": "models/star.glb", "scale": 32 }) = STAR : "star" []
+
+@PointClass color(204 204 204) model({ "path": "models/ship.glb", "scale": 32 }) size(-8.0 -8.0 -8.0, 8.0 8.0 8.0) = ship : "set sail" 
+[
+	angles(string) : "" : "0.0 0.0 0.0"
+]
+@PointClass color(204 0 0) model({ "path": "models/bird.glb", "scale": 32 }) size(-8.0 -20.0 -8.0, 8.0 16.0 8.0) = E_BIRD : "errrm euuguh uh" 
+[
+	bird_left(choices) : "" : 0 = 
+	[
+		0 : "No"
+		1 : "Yes"
+	]
+	bird_radius(float) : "" : "0.0"
+]
+
+@PointClass color(204 0 0) size(-8.0 -20.0 -8.0, 8.0 16.0 8.0) model({ "path": "models/bouncer.glb", "scale": 32 }) = E_BOUNCER : "errrm euuguh uh" []
+
+@PointClass color(204 0 0) model({ "path": "models/crabnew.glb", "scale": 16 }) size(-8.0 -20.0 -8.0, 8.0 16.0 8.0) = E_CRAB : "errrm euuguh uh" []
+
+@PointClass color(204 0 0) model({ "path": "models/Esper3.glb", "scale": 16 }) size(-8.0 -20.0 -8.0, 8.0 16.0 8.0) = E_ESPER : "errrm euuguh uh" []
+
+@PointClass color(204 0 0) model({ "path": "models/blossom.glb", "scale": 32 }) size(-8.0 -20.0 -8.0, 8.0 16.0 8.0) = E_FLOWER : "errrm euuguh uh" []
+
+@PointClass color(204 0 0) model({ "path": "models/Turret.glb", "scale": 32 }) size(-8.0 -20.0 -8.0, 8.0 16.0 8.0) = E_SHOOTER : "errrm euuguh uh" []
+
+@PointClass color(204 0 0) model({ "path": "models/spider.glb", "scale": 32 }) size(-8.0 -20.0 -8.0, 8.0 16.0 8.0) = E_SPIDER : "errrm euuguh uh" []
+@BaseClass size(-8.0 -8.0 -8.0, 8.0 8.0 8.0) color(204 204 204) = Phong
+[
+	_phong(choices) : "Phong shading" : 0 = 
+	[
+		0 : "Disabled"
+		1 : "Smooth shading"
+	]
+	_phong_angle(float) : "Phong smoothing angle" : "89.0"
+]
+
+@BaseClass size(-8.0 -8.0 -8.0, 8.0 8.0 8.0) color(204 204 204) = VertexMergeDistance
+[
+	_vertex_merge_distance(float) : "Adjustable value to snap vertices to on map build. This can reduce instances of seams between polygons." : "0.03125"
+]
+
+@BaseClass size(-8.0 -8.0 -8.0, 8.0 8.0 8.0) color(204 204 204) = CullInteriorFaces
+[
+	_cull_interior_faces(choices) : "If true, cull interior faces with matching vertices or faces that are flush within a larger face. Note: This has a performance impact that scales with how many brushes are in the brush entity." : 0 = 
+	[
+		0 : "No"
+		1 : "Yes"
+	]
+]
+
+@SolidClass color(204 204 204) base(VertexMergeDistance, CullInteriorFaces) = worldspawn : "Default static world geometry. Builds a StaticBody3D with a single MeshInstance3D and a single convex CollisionShape3D shape." []
+
+@SolidClass color(204 204 204) base(Phong, VertexMergeDistance, CullInteriorFaces) = func_geo : "Static collidable geometry. Builds a StaticBody3D with a MeshInstance3D, a single concave CollisionShape3D, and an OccluderInstance3D." []
+
+@SolidClass color(204 204 204) base(Phong, VertexMergeDistance, CullInteriorFaces) = func_detail : "Static collidable geometry. Builds a StaticBody3D with a MeshInstance3D and a single concave CollisionShape3D. Does not occlude other VisualInstance3D nodes." []
+
+@SolidClass color(204 204 204) base(Phong, VertexMergeDistance, CullInteriorFaces) = func_detail_illusionary : "Static geometry with no collision. Builds a Node3D with a MeshInstance3D. Does not occlude other VisualInstance3D nodes." []
+
+@SolidClass color(204 204 204) base(Phong, VertexMergeDistance, CullInteriorFaces) = func_illusionary : "Static geometry with no collision. Builds a Node3D with a MeshInstance3D and an Occluder3D to aid in render culling of other VisualInstance3D nodes." []
