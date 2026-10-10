@@ -10,6 +10,7 @@ var __compile_level_path: String;
 const DEFAULT_LVL_CFG: Dictionary = {
 	"author": "DEMETER",
 	"world_title": "CUSTOM",
+	"world_colour": "FFFFFF",
 	"pretitle": "CUSTOM",
 	"title": "Custom Level",
 	"transition": "whats mine is yours,\n\t\tand what's yours is mine",
@@ -52,6 +53,8 @@ func init_levelbutton(node, level:String)->void:
 	node.get_node('LvlPreTitle').text = GDPatch.get_mod("customspheres").custom_levels[level].pretitle;
 	node.get_node('LvlName').text = GDPatch.get_mod("customspheres").custom_levels[level].title;
 	node.get_node('LvlScore').text = GDPatch.get_mod("customspheres").custom_levels[level].author;
+	node.get_node('LvlScore').modulate = GDPatch.get_mod("customspheres").get_worldcolour(level);
+	node.get_node('LevelButton').color = GDPatch.get_mod("customspheres").get_worldcolour(level);
 	node.get_node('LevelButton').pressed.connect(node.get_node("../../..")._on_lvl_pressed.bind(level, false));
 	node.get_node('LevelButton').focus_entered.connect(node.get_node("../../..")._on_lvl_focus.bind(level, false));
 
@@ -67,6 +70,16 @@ func get_shipscreen(level:String)->String:
 		"conditions": GDPatch.get_mod("customspheres").custom_levels[level].get('conditions', DEFAULT_LVL_CFG.conditions),
 		"warning": GDPatch.get_mod("customspheres").custom_levels[level].get('warning', DEFAULT_LVL_CFG.warning),
 	});
+
+
+func get_worldcolour(level:String)->Color:
+	var _worldcol: String = GDPatch.get_mod("customspheres").custom_levels[level].get('world_colour', DEFAULT_LVL_CFG.world_colour);
+	var _col: Color = Color.html(_worldcol) if Color.html_is_valid(_worldcol) else Color.WHITE;
+	return _col;
+
+
+func get_worldtitle(level:String)->String:
+	return GDPatch.get_mod("customspheres").custom_levels[level].get('world_title', DEFAULT_LVL_CFG.world_title);
 
 
 func get_ambience(level:String)->AudioStream:

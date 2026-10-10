@@ -6,8 +6,7 @@ GDPatch.patch_script_as_text("Scripts/UI/play.gdc", function(ctx, src)
 		[[%0
 	if GDPatch.get_mod("customspheres"): 
 		$MainSelect/Custom.show()
-	]]
-	)
+]])
 	return src
 end)
 -- Init custom buttons
@@ -40,8 +39,7 @@ GDPatch.patch_script_as_text("Scripts/UI/custom.gdc", function(ctx, src)
 				_new_lvlbutton.get_node('LevelButton').pressed.connect(_new_lvlbutton.get_node("../../..")._on_lvl_pressed.bind(lvl, false));
 				_new_lvlbutton.get_node('LevelButton').focus_entered.connect(_new_lvlbutton.get_node("../../..")._on_lvl_focus.bind(lvl, false));
 				_lvlbleh.add_child(_new_lvlbutton)
-	]]
-	)
+]])
 	return src
 end)
 
@@ -69,8 +67,7 @@ GDPatch.patch_script_as_text("Scripts/UI/level_transition.gdc", function(ctx, sr
 			Audio.sound_play_ui(Audio.sndLevelTransition)
 			$AnimationPlayer.play("start")
 			return
-	]]
-	)
+]])
 	return src
 end)
 
@@ -83,8 +80,7 @@ GDPatch.patch_script_as_text("Scripts/System/global.gdc", function(ctx, src)
 	if GDPatch.get_mod("customspheres").custom_levels.has(_lev):
 		_nod.texture = GDPatch.get_mod("customspheres").load_icon(_lev);
 		return;
-	]]
-	)
+]])
 	return src
 end)
 -- fuck
@@ -99,8 +95,7 @@ GDPatch.patch_script_as_text("Scripts/System/global.gdc", function(ctx, src)
 		if !simple: Audio.sound_play_ui(Audio.sndUIGameStart);
 		LoadingScreen.start_loading(GDPatch.get_mod("customspheres").custom_levels.get(_lvl).path, stop_music, simple);
 		return;
-	]]
-	)
+]])
 	return src
 end)
 
@@ -122,8 +117,7 @@ GDPatch.patch_script_as_text("Scripts/System/global.gdc", function(ctx, src)
 		global.showdeploying = false
 		global._setlevel(_next_level,false)
 		return
-	]]
-	)
+]])
 	return src
 end)
 
@@ -138,10 +132,9 @@ GDPatch.patch_script_as_text("Scripts/UI/ship_screen.gdc", function(ctx, src)
 		$Label9.text = GDPatch.get_mod("customspheres").get_shipscreen(global.currentlevel)
 		$Label4.text = GDPatch.get_mod("customspheres").custom_levels.get(global.currentlevel).title
 		$Label3.text = GDPatch.get_mod("customspheres").custom_levels.get(global.currentlevel).pretitle + " + " + "CUSTOM"
-		$Label14.modulate = Color("ea531f")
+		$Label14.modulate = GDPatch.get_mod("customspheres").get_worldcolour(global.currentlevel)
 		return
-	]]
-	)
+]])
 	return src
 end)
 
@@ -153,8 +146,7 @@ GDPatch.patch_script_as_text("Scripts/Player/Player2.gdc", function(ctx, src)
 	if GDPatch.get_mod("customspheres").custom_levels.has(global.currentlevel):
 		if global.play_intro_music:
 			Audio.music_play(GDPatch.get_mod("customspheres").get_intromusic(global.currentlevel));
-	]]
-	)
+]])
 	return src
 end)
 
@@ -172,21 +164,24 @@ GDPatch.patch_script_as_text("Scripts/FX/world_environment.gdc", function(ctx, s
 		_amb.stream = _amb_sfx;
 		_amb.volume_linear = 1.0;
 		_amb.play();
-	]]
-	)
+]])
 	return src
 end)
 
 -- patch lvl complete screen
 GDPatch.patch_script_as_text("Scripts/UI/level_complete.gdc", function(ctx, src)
 	src = src:gsub(
-		utils.escape([[func _leaderboardstart(board, ldrpts):]]),
-		[[%0
+		utils.escape([[pixelmat.set_shader_parameter("colorr", _blehcolor)]]),
+		[[%1
 	if GDPatch.get_mod("customspheres").custom_levels.has(global.currentlevel):
+		var _col: Color = GDPatch.get_mod("customspheres").get_worldcolour(global.currentlevel)
+
+		$LevelCompleteUI/bg.color = _col
+		pixelmat.set_shader_parameter("colorr", _col)
+
 		if !GDPatch.get_mod("customspheres").get_nextlevel(global.currentlevel).is_empty():
 			$LevelCompleteUI/HBoxContainer/cont.show()
-	]]
-	)
+]])
 	return src
 end)
 
@@ -197,7 +192,7 @@ GDPatch.patch_script_as_text("Scripts/UI/deploy_screen.gdc", function(ctx, src)
 		[[%0
 	if GDPatch.get_mod("customspheres").custom_levels.has(global.currentlevel):
 		if !GDPatch.get_mod("customspheres").get_nextlevel(global.currentlevel).is_empty():
-			$TextureRect2/bar.color = Color("ffffffff")
+			$TextureRect2/bar.color = GDPatch.get_mod("customspheres").get_worldcolour(global.currentlevel)
 			Audio.sound_play_ui(Audio.sndDeployClick)
 			if saves.skin_portrait == 0:
 				$TextureRect2/port.texture = _fawn1	
@@ -211,7 +206,7 @@ GDPatch.patch_script_as_text("Scripts/UI/deploy_screen.gdc", function(ctx, src)
 			$ColorRect4/Lvl2.text = GDPatch.get_mod("customspheres").custom_levels.get(_next).pretitle
 
 			$bg2/LevelText.text = "CUSTOM"
-			$bg2/worldtext.text = GDPatch.get_mod("customspheres").custom_levels.get(global.currentlevel).world_title
+			$bg2/worldtext.text = GDPatch.get_mod("customspheres").get_worldtitle(global.currentlevel)
 			$firstsquare/TextureRect.texture = GDPatch.get_mod("customspheres").get_icon(global.currentlevel)
 			$"2ndsquare/TextureRect3".texture = GDPatch.get_mod("customspheres").get_icon(_next)
 			$AudioStreamPlayer2.stream = _deployingmus
@@ -220,7 +215,50 @@ GDPatch.patch_script_as_text("Scripts/UI/deploy_screen.gdc", function(ctx, src)
 			$AnimationPlayer2.play("loop")
 			$DidYouKnowText.text = global._get_random_hint()
 			return
-		]]
-	)
+]])
+	return src
+end)
+
+-- patch pause screen Absolutely Awesome Patches
+GDPatch.patch_script_as_text("Scripts/UI/pause.gdc", function(ctx, src)
+	src = src:gsub(
+		utils.escape([[var _currentlvlarray = saves._lvls.find(global.currentlevel)]]),
+		[[%1
+	if GDPatch.get_mod("customspheres").custom_levels.has(global.currentlevel):
+		var _col: Color = GDPatch.get_mod("customspheres").get_worldcolour(global.currentlevel)
+		_lolmat.set_shader_parameter("bg_color",_col)
+	elif global.levelrush == 1:
+		_lolmat.set_shader_parameter("bg_color",Color("C42B47"))
+		_lolmat.set_shader_parameter("fg_color",Color("ffffff"))
+	elif global.museum:
+		_lolmat.set_shader_parameter("bg_color",Color("8700ff"))
+		_lolmat.set_shader_parameter("fg_color",Color("ffffff"))
+	elif global.bonus:
+		_lolmat.set_shader_parameter("bg_color",Color("ea531f"))
+		_lolmat.set_shader_parameter("fg_color",Color("ffffff"))
+	else:
+		_lolmat.set_shader_parameter("bg_color",Color("a0a0a0"))
+		_lolmat.set_shader_parameter("fg_color",Color("ffffff"))
+]])
+	return src
+end)
+
+-- patch gameui
+GDPatch.patch_script_as_text("Scripts/UI/gameui.gdc", function(ctx, src)
+	src = src:gsub(
+		utils.escape([[_adsvignette.material.set_shader_parameter("intensity", 0.0)]]),
+		[[%1
+	if GDPatch.get_mod("customspheres").custom_levels.has(global.currentlevel):
+		var _col: Color = GDPatch.get_mod("customspheres").get_worldcolour(global.currentlevel)
+		$UI/LevelDisplay.color = _col
+	elif global.levelrush == 1:
+		$UI/LevelDisplay.color = Color("C42B47")
+	elif global.museum:
+		$UI/LevelDisplay.color = Color("8700ff")
+	elif global.bonus:
+		$UI/LevelDisplay.color = Color("ea531f")
+	else:
+		$UI/LevelDisplay.color = Color("000000")
+]])
 	return src
 end)
