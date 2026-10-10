@@ -12,6 +12,7 @@ const DEFAULT_LVL_CFG: Dictionary = {
 	"world_title": "CUSTOM",
 	"world_colour": "FFFFFF",
 	"world_light_colour": "FFFFFF",
+	"music_override": "",
 	"pretitle": "CUSTOM",
 	"title": "Custom Level",
 	"transition": "whats mine is yours,\n\t\tand what's yours is mine",
@@ -98,7 +99,7 @@ func get_intromusic(level:String)->AudioStream:
 
 
 func get_mainmusic(level:String)->AudioStream:
-	return GDPatch.get_mod("customspheres").custom_levels[level].get('mainmusic', Audio.mscWorld1_Main);
+	return GDPatch.get_mod("customspheres").custom_levels[level].get('levelmusic', Audio.mscWorld1_Main);
 
 
 func get_skybox(level:String)->ImageTexture:
@@ -194,9 +195,15 @@ func load_custom_levels()->void:
 
 					if _try_load != null:
 						custom_levels[_sub_dir] = load_config(_sub_dir);
-						custom_levels[_sub_dir]["icon"] = load_icon(_sub_dir); 
-						custom_levels[_sub_dir]["intromusic"] = load_sound(_folder_path.path_join("intro.ogg"));
-						custom_levels[_sub_dir]["levelmusic"] = load_sound(_folder_path.path_join("main.ogg"));
+						custom_levels[_sub_dir]["icon"] = load_icon(_sub_dir);
+						if custom_levels[_sub_dir].get("music_override").is_empty():
+							custom_levels[_sub_dir]["intromusic"] = load_sound(_folder_path.path_join("intro.ogg"));
+							custom_levels[_sub_dir]["levelmusic"] = load_sound(_folder_path.path_join("main.ogg"));
+						else:
+							var _override_path: String = level_directory.path_join(custom_levels[_sub_dir].get("music_override"));
+							custom_levels[_sub_dir]["intromusic"] = load_sound(_override_path.path_join("intro.ogg"));
+							custom_levels[_sub_dir]["levelmusic"] = load_sound(_override_path.path_join("main.ogg"));
+
 						custom_levels[_sub_dir]["ambience"] = load_sound(_folder_path.path_join("ambience.ogg"));
 						custom_levels[_sub_dir]["skybox"] = load_skybox(_sub_dir);
 						custom_levels[_sub_dir]["path"] = _full_scene_path;

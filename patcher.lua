@@ -106,15 +106,15 @@ GDPatch.patch_script_as_text("Scripts/System/global.gdc", function(ctx, src)
 		[[%0
 	if GDPatch.get_mod("customspheres").custom_levels.has(global.currentlevel):
 		var _next_level: String = GDPatch.get_mod("customspheres").get_nextlevel(global.currentlevel)
-
+		global.play_intro_music = false
 		Audio.music_resume()
 		Audio.music_resume2()
-		Audio.music_stop()
+
 		Audio.reverb_trigger = 0
 		Audio.music_mult = 0.0
 		Audio._lowpass_slow()
 		
-		global.showdeploying = false
+		global.showdeploying = true
 		global._setlevel(_next_level,false)
 		return
 ]])
