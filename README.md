@@ -14,11 +14,11 @@ Levels must have a valid scene file created by Godot or the mods compiler tools.
 ## + QUICKSTART
 To create a custom level, you will need the **CICADAMATA FGD**, and [Trenchbroom 2025.4+](https://github.com/TrenchBroom/TrenchBroom/releases#release-v2025.4)
 
-This mod ships with an FGD preconfigured for the game (`/ccda_fgd/`).
+This mod ships with a FGD preconfigured for the game in `ccda_fgd`.
 
-Once you have the FGD and Trenchbroom downloaded, copy the contents of the FGD to `AppData/Roaming/TrenchBroom/games/Cicadamata`.
+Once you have the FGD extracted and Trenchbroom downloaded, copy the contents of the FGD to `AppData/Roaming/TrenchBroom/games/Cicadamata`.
 
-For more information on mapping for trenchbroom, refer to the [official documentation](https://trenchbroom.github.io/manual/latest/)
+For more information on mapping for Trenchbroom, refer to the [official documentation](https://trenchbroom.github.io/manual/latest/)
 
 #### + Setting up Trenchbroom
 1. Use [GDRE Tools](https://github.com/GDRETools/gdsdecomp) or [PCKExplorer](https://github.com/DmitriySalnikov/GodotPCKExplorer) to decompile and extract necessary resources from the game.
@@ -71,6 +71,8 @@ You can provide a `terminal.png` for the icon that appears your terminal screens
 ### + Level Design Tips / Considerations
 - Keep grid size at `32x` for most main level geometry.
 - Keep func_spikes at a maximum of `16-32` units tall.
+- Group non-detail brush geometry together with `func_geo`. This creates an occluder roughly the size of the brush group. This is incredibly important for optimizing levels with interiors.
+- Group detailed brushwork with `func_detail`.
 - Create all brushes with the `__tb_empty` texture, apply textures to all visible brush faces, and then replace all instances of `__tb_empty` with the 'skip' texture. This workflow makes it much easier to optimize geometry and unseen faces.
 
 #### + Caveats // TBD // Bugs
