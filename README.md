@@ -9,15 +9,17 @@ PROVIDES ACCESS TO USER GENERATED SPHERES
 
 ## + BASIC USAGE
 The mod loads custom levels located in `GDPatch/mods/customspheres/levels`.
-Levels must have a valid scene file created by the compiler tools.
+Levels must have a valid scene file created by Godot or the mods compiler tools.
 
 ## + QUICKSTART
 To create a custom level, you will need the **CICADAMATA FGD**, and [Trenchbroom 2025.4+](https://github.com/TrenchBroom/TrenchBroom/releases#release-v2025.4)
 
-This mod ships with an FGD preconfigured for the game (`/ccda_fgd/`)
+This mod ships with an FGD preconfigured for the game (`/ccda_fgd/`).
+
 Once you have the FGD and Trenchbroom downloaded, copy the contents of the FGD to `AppData/Roaming/TrenchBroom/games/Cicadamata`.
 
 For more information on mapping for trenchbroom, refer to the [official documentation](https://trenchbroom.github.io/manual/latest/)
+
 #### + Setting up Trenchbroom
 1. Use [GDRE Tools](https://github.com/GDRETools/gdsdecomp) or [PCKExplorer](https://github.com/DmitriySalnikov/GodotPCKExplorer) to decompile and extract necessary resources from the game.
 2. Extract the textures located under `FuncGodot/textures`
