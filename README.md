@@ -1,13 +1,13 @@
 # + CUSTOM SPHERES"
 PROVIDES ACCESS TO USER GENERATED SPHERES
 
-## + INSTALLATION"
+## + INSTALLATION
 1. Install [GDPatch](https://gdpatch.dev/)
 2. [Download this repo as a .zip](https://github.com/elysiaisalive/cicadamata-customspheres/archive/refs/heads/master.zip)
 3. Unzip the mod into your mods folder located in (`GDPatch/mods/customspheres`)
 4. You can now play custom levels!
 
-## + BASIC USAGE"
+## + BASIC USAGE
 The mod loads custom levels located in `GDPatch/mods/customspheres/levels`.
 Levels must have a valid scene file created by the compiler tools.
 
@@ -53,26 +53,27 @@ Once you run the compile tools, the mod will autogenerate a scene file and a con
 | terminal_date | string | The date of your terminal e.x "DD_MMM_7AS" |
 | terminal_text | string | The text of your terminal |
 
-#### Custom Images
+#### + Custom Images
 You can provide custom icons and thumbnails for levels by adding an `icon.png` and a `thumbnail.png`.
 It is recommended to keep icons at `9x9`, and thumbnails at `84x69` to keep consistency with the games style.
-#### Custom Music
+#### + Custom Music
 To add custom music to your level you must add an `intro.ogg` and `main.ogg`.
-#### Custom Skybox and Ambience
+#### + Custom Skybox and Ambience
 Levels can also have a custom ambient track and skybox by adding respective `ambience.ogg` and `skybox.png`.
 Skyboxes are recommended to be authored at `2048x1024` and then rescaled to `1024x1024` for the final texture.
-#### Custom Terminal
-For custom terminal text, see [here](###-+-Customizing-your-level).
+#### + Custom Terminal
+For custom terminal text, see the above config properties chart.
 
 You can provide a `terminal.png` for the icon that appears your terminal screens. It is recommended to author your icons at `1024x1024`, and white monochromatic to keep consistency with the games style.
 
-### + Level Design Tips/Considerations
+### + Level Design Tips / Considerations
 - Keep grid size at `32x` for most main level geometry.
 - Keep func_spikes at a maximum of `16-32` units tall.
 - Create all brushes with the `__tb_empty` texture, apply textures to all visible brush faces, and then replace all instances of `__tb_empty` with the 'skip' texture. This workflow makes it much easier to optimize geometry and unseen faces.
 
-#### + Caveats // TBD
+#### + Caveats // TBD // Bugs
 - Player leaderboards are not available
 - Custom map textures are currently not possible
+- Music will restart upon deployment in a level after transitioning to `next_level`
 
 ### + ACCESS USER CONTENT AT YOUR OWN RISK +
