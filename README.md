@@ -48,7 +48,10 @@ Once you run the compile tools, the mod will autogenerate a scene file and a con
 | location | string | Location on the dropship screen |
 | conditions | string | Conditions on the dropship screen |
 | warning | string | Warning on the dropship screen |
-| next_level | string| The name of the next level to deploy into. Must be a valid level inside `GDPatch/mods/customspheres/levels`
+| next_level | string | The name of the next level to deploy into. Must be a valid level inside `GDPatch/mods/customspheres/levels`
+| terminal_title | string | The title of your terminal e.x "+ CUSTOM.ONR" |
+| terminal_date | string | The date of your terminal e.x "DD_MMM_7AS" |
+| terminal_text | string | The text of your terminal |
 
 #### Custom Images
 You can provide custom icons and thumbnails for levels by adding an `icon.png` and a `thumbnail.png`.
@@ -58,11 +61,15 @@ To add custom music to your level you must add an `intro.ogg` and `main.ogg`.
 #### Custom Skybox and Ambience
 Levels can also have a custom ambient track and skybox by adding respective `ambience.ogg` and `skybox.png`.
 Skyboxes are recommended to be authored at `2048x1024` and then rescaled to `1024x1024` for the final texture.
+#### Custom Terminal
+For custom terminal text, see [here](###-+-Customizing-your-level).
+
+You can provide a `terminal.png` for the icon that appears your terminal screens. It is recommended to author your icons at `1024x1024`, and white monochromatic to keep consistency with the games style.
 
 ### + Level Design Tips/Considerations
 - Keep grid size at `32x` for most main level geometry.
 - Keep func_spikes at a maximum of `16-32` units tall.
-- Create all brushes with __tb_empty, apply textures to all visible brush faces, and then replace all instances of __tb_empty with the 'skip' texture. This workflow makes it much easier to optimize geometry and unseen faces.
+- Create all brushes with the `__tb_empty` texture, apply textures to all visible brush faces, and then replace all instances of `__tb_empty` with the 'skip' texture. This workflow makes it much easier to optimize geometry and unseen faces.
 
 #### + Caveats // TBD
 - Player leaderboards are not available

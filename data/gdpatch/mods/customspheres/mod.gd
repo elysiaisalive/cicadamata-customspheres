@@ -23,7 +23,10 @@ const DEFAULT_LVL_CFG: Dictionary = {
 	"dmnd_score": 999,
 	"gold_score": 99,
 	"slvr_score": 9,
-	"next_level": ""
+	"next_level": "",
+	"terminal_title": "+ CUSTOM.ONR",
+	"terminal_date": "??_???_7AS",
+	"terminal_text": "A column of ants, a hive of bees and a den of wolves.",
 };
 
 
@@ -86,6 +89,18 @@ func get_world_light_colour(level:String)->Color:
 	return _col;
 
 
+func get_terminal_data(level:String)->Dictionary[String, String]:
+	return {
+		"title": GDPatch.get_mod("customspheres").custom_levels[level].get('terminal_title', DEFAULT_LVL_CFG.terminal_title),
+		"date": GDPatch.get_mod("customspheres").custom_levels[level].get('terminal_date', DEFAULT_LVL_CFG.terminal_date),
+		"text": GDPatch.get_mod("customspheres").custom_levels[level].get('terminal_text', DEFAULT_LVL_CFG.terminal_text),
+	};
+
+
+func get_terminal_icon(level:String)->ImageTexture:
+	return GDPatch.get_mod("customspheres").custom_levels[level].get('terminal', load("res://Assets/UI/Terminal/lvl_1_1.png"));
+
+
 func get_worldtitle(level:String)->String:
 	return GDPatch.get_mod("customspheres").custom_levels[level].get('world_title', DEFAULT_LVL_CFG.world_title);
 
@@ -116,6 +131,12 @@ func get_chapter_end(level:String)->String:
 
 func get_icon(level:String)->ImageTexture:
 	return GDPatch.get_mod("customspheres").custom_levels[level].get('icon', load("res://Assets/UI/LevelIcons/bonus_icon.png"));
+
+
+func load_terminal_icon(level:String)->ImageTexture:
+	var _path: String = level_directory.path_join(level);
+
+	return load_texture(_path.path_join("terminal.png"));
 
 
 func load_skybox(level:String)->ImageTexture:
@@ -206,6 +227,7 @@ func load_custom_levels()->void:
 
 						custom_levels[_sub_dir]["ambience"] = load_sound(_folder_path.path_join("ambience.ogg"));
 						custom_levels[_sub_dir]["skybox"] = load_skybox(_sub_dir);
+						custom_levels[_sub_dir]["terminal"] = load_terminal_icon(_sub_dir);
 						custom_levels[_sub_dir]["path"] = _full_scene_path;
 
 			_sub_dir = _main_dir.get_next();

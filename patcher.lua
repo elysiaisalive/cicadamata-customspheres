@@ -266,3 +266,19 @@ GDPatch.patch_script_as_text("Scripts/UI/gameui.gdc", function(ctx, src)
 ]])
 	return src
 end)
+
+-- patch terminal
+GDPatch.patch_script_as_text("Scripts/UI/terminal_screen.gdc", function(ctx, src)
+	src = src:gsub(
+		utils.escape([[$AnimationPlayer.play("start")]]),
+		[[%0
+	if GDPatch.get_mod("customspheres").custom_levels.has(global.currentlevel):
+		var _terminal: Dictionary = GDPatch.get_mod("customspheres").get_terminal_data(global.currentlevel)
+		title.text = _terminal.title;
+		date.text = _terminal.date;
+		term_text = _terminal.text;
+		$CanvasLayer/ColorRect2/TextureRect2.texture = GDPatch.get_mod("customspheres").get_terminal_icon(global.currentlevel)
+		
+]])
+	return src
+end)
