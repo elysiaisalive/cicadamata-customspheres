@@ -29,7 +29,7 @@ GDPatch.patch_script_as_text("Scripts/UI/custom.gdc", function(ctx, src)
 				var _new_lvlbutton: ColorRect = load("res://Scenes/UI/level_button.tscn").instantiate()
 				_new_lvlbutton.level = lvl
 				_new_lvlbutton.custom = true
-				_new_lvlbutton.hiderank = true
+				_new_lvlbutton.hiderank = false
 				_new_lvlbutton.forceunlock = true
 				_new_lvlbutton.get_node('TextureRect').texture = GDPatch.get_mod("customspheres").load_thumbnail(lvl);
 				_new_lvlbutton.get_node('WorldIcon').texture = GDPatch.get_mod("customspheres").load_icon(lvl);
@@ -144,6 +144,7 @@ GDPatch.patch_script_as_text("Scripts/Player/Player2.gdc", function(ctx, src)
 		utils.escape([[func _ready() -> void :]]),
 		[[%0
 	if GDPatch.get_mod("customspheres").custom_levels.has(global.currentlevel):
+		global.bonus = false
 		if global.play_intro_music:
 			Audio.music_play(GDPatch.get_mod("customspheres").get_intromusic(global.currentlevel));
 ]])
@@ -185,6 +186,8 @@ GDPatch.patch_script_as_text("Scripts/UI/level_complete.gdc", function(ctx, src)
 
 		if !GDPatch.get_mod("customspheres").get_nextlevel(global.currentlevel).is_empty():
 			$LevelCompleteUI/HBoxContainer/cont.show()
+		else:
+			$LevelCompleteUI/HBoxContainer/cont.hide()
 ]])
 	return src
 end)
