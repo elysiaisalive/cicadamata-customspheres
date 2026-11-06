@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" format=3 uid="uid://wboadxki1qea"]
+
+[ext_resource type="PackedScene" uid="uid://cw5r7ye62sdbs" path="res://Scenes/Level Design/Stage Elements/fan.tscn" id="1_x8nap"]
+[ext_resource type="Script" uid="uid://d1nwwgcrner8b" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_xc81c"]
+[ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="2_xc81c"]
+
+[sub_resource type="Resource" id="Resource_xc81c"]
+script = ExtResource("1_xc81c")
+display_asset_path = "\"models/fan.glb\""
+scale = "32"
+metadata/_custom_type_script = "uid://d1nwwgcrner8b"
+
+[resource]
+script = ExtResource("2_xc81c")
+scene_file = ExtResource("1_x8nap")
+display_descriptors = Array[ExtResource("1_xc81c")]([SubResource("Resource_xc81c")])
+classname = "FAN"
+description = "fa,n"
+meta_properties = Dictionary[String, Variant]({
+"color": Color(0.871852, 0.743011, 0.410685, 1),
+"model": "{ \"path\": \"models/fan.glb\", \"scale\": 32 }",
+"size": AABB(-8, -20, -8, 8, 8, 8)
+})

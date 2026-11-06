@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" format=3 uid="uid://cbw13n5k620pw"]
+
+[ext_resource type="PackedScene" uid="uid://b15tt8n0uo5j0" path="res://Scenes/Level Design/Stage Elements/spring.tscn" id="1_m48ul"]
+[ext_resource type="Script" uid="uid://d1nwwgcrner8b" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_vb781"]
+[ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="2_vb781"]
+
+[resource]
+script = ExtResource("2_vb781")
+scene_file = ExtResource("1_m48ul")
+classname = "SPRING"
+description = "jume"
+class_properties = Dictionary[String, Variant]({
+"velocity_x": 0.0,
+"velocity_y": 0.0,
+"velocity_z": 0.0
+})
+auto_apply_to_matching_node_properties = true
+meta_properties = Dictionary[String, Variant]({
+"color": Color(0.812709, 0.719908, 0.839621, 1),
+"size": AABB(-8, -20, -8, 8, 8, 8)
+})

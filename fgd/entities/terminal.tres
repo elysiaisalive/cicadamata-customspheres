@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" format=3 uid="uid://dps576pqpdkds"]
+
+[ext_resource type="Script" uid="uid://d1nwwgcrner8b" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_53xnw"]
+[ext_resource type="Script" path="scripts/terminal_spawn.gd" id="3_53xnw"]
+[ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="3_q8l2c"]
+
+[sub_resource type="Resource" id="Resource_kvms7"]
+script = ExtResource("1_53xnw")
+display_asset_path = "\"models/terminal.glb\""
+scale = "32"
+metadata/_custom_type_script = "uid://d1nwwgcrner8b"
+
+[resource]
+script = ExtResource("3_q8l2c")
+script_class = ExtResource("3_53xnw")
+display_descriptors = Array[ExtResource("1_53xnw")]([SubResource("Resource_kvms7")])
+classname = "TERMINAL"
+description = "reading is fun"
+class_properties = Dictionary[String, Variant]({
+"angles": Vector3(0, 0, 0)
+})
+auto_apply_to_matching_node_properties = true
+meta_properties = Dictionary[String, Variant]({
+"color": Color(1, 0.5833334, 0, 1),
+"size": AABB(-8, -8, -8, 8, 8, 8)
+})

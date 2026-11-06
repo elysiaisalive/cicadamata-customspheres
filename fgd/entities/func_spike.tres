@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDSolidClass" format=3 uid="uid://bwqu5mh7g7fiy"]
+
+[ext_resource type="Script" uid="uid://5cow84q03m6a" path="res://addons/func_godot/src/fgd/func_godot_fgd_solid_class.gd" id="1_kid8y"]
+[ext_resource type="Script" path="scripts/func_spike.gd" id="2_2ckna"]
+
+[resource]
+script = ExtResource("1_kid8y")
+build_visuals = false
+collision_layer = 4
+collision_mask = 7
+script_class = ExtResource("2_2ckna")
+classname = "func_spike"
+description = "Ouchie ouchie!"
+node_class = "Area3D"
+metadata/_custom_type_script = "uid://5cow84q03m6a"

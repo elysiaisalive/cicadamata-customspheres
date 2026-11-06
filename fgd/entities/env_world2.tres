@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" format=3 uid="uid://d0w7115u4sgrb"]
+
+[ext_resource type="Script" uid="uid://d1nwwgcrner8b" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_b118k"]
+[ext_resource type="PackedScene" uid="uid://paxgeyxv2qxs" path="res://Scenes/Level Design/Level Setup/Environments/env_world_2.tscn" id="2_b118k"]
+[ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="3_honwr"]
+
+[resource]
+script = ExtResource("3_honwr")
+scene_file = ExtResource("2_b118k")
+classname = "ENV_WORLD2"
+description = "the environment"
+meta_properties = Dictionary[String, Variant]({
+"color": Color(0.03137255, 0.20392157, 0.8, 1),
+"size": AABB(-8, -8, -8, 8, 8, 8)
+})

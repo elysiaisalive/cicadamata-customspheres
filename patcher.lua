@@ -138,13 +138,23 @@ GDPatch.patch_script_as_text("Scripts/UI/ship_screen.gdc", function(ctx, src)
 	return src
 end)
 
+-- patch ship for editor compiling
+GDPatch.patch_script_as_text("Scripts/Player/ship.gdc", function(ctx, src)
+	src = src:gsub(
+		utils.escape([[func _ready() -> void :]]),
+		[[%0
+	if GDPatch.get_mod("customspheres").is_building_from_editor():
+		return
+]])
+	return src
+end)
+
 -- patch music
 GDPatch.patch_script_as_text("Scripts/Player/Player2.gdc", function(ctx, src)
 	src = src:gsub(
 		utils.escape([[func _ready() -> void :]]),
 		[[%0
 	if GDPatch.get_mod("customspheres").custom_levels.has(global.currentlevel):
-		global.bonus = false
 		if global.play_intro_music:
 			Audio.music_play(GDPatch.get_mod("customspheres").get_intromusic(global.currentlevel));
 ]])
@@ -163,6 +173,18 @@ GDPatch.patch_script_as_text("Scripts/FX/world_environment.gdc", function(ctx, s
 		var _col: Color = GDPatch.get_mod("customspheres").get_world_light_colour(global.currentlevel);
 		var _sun: DirectionalLight3D = self.find_child("DirectionalLight3D");
 		_sun.light_color = _col;
+
+		var _fog_enabled: bool = GDPatch.get_mod("customspheres").get_fog_enabled(global.currentlevel);
+		self.get_environment().set_fog_enabled(_fog_enabled);
+
+		var _volumetric_fog_enabled: bool = GDPatch.get_mod("customspheres").get_volumetric_fog_enabled(global.currentlevel);
+		self.get_environment().set_fog_enabled(_volumetric_fog_enabled);
+
+		var _fog_affect: float = GDPatch.get_mod("customspheres").get_env_fog_affect(global.currentlevel);
+		self.get_environment().set_fog_sky_affect(_fog_affect);		
+
+		var _volumetric_fog_affect: float = GDPatch.get_mod("customspheres").get_env_volumetric_fog_skyaffect(global.currentlevel);
+		self.get_environment().set_volumetric_fog_sky_affect(_volumetric_fog_affect);
 
 		var _amb: AudioStreamPlayer = self.find_child("amb");
 		var _amb_sfx: AudioStream = GDPatch.get_mod("customspheres").get_ambience(global.currentlevel);
@@ -246,6 +268,9 @@ GDPatch.patch_script_as_text("Scripts/UI/pause.gdc", function(ctx, src)
 	else:
 		_lolmat.set_shader_parameter("bg_color",Color("a0a0a0"))
 		_lolmat.set_shader_parameter("fg_color",Color("ffffff"))
+
+	if GDPatch.get_mod("customspheres").get_nextlevel(global.currentlevel).is_empty():
+		$Panel/GridContainer/playnext.hide()
 ]])
 	return src
 end)
@@ -280,8 +305,7 @@ GDPatch.patch_script_as_text("Scripts/UI/terminal_screen.gdc", function(ctx, src
 		title.text = _terminal.title;
 		date.text = _terminal.date;
 		term_text = _terminal.text;
-		$CanvasLayer/ColorRect2/TextureRect2.texture = GDPatch.get_mod("customspheres").get_terminal_icon(global.currentlevel)
-		
+		$CanvasLayer/ColorRect2/TextureRect2.texture = GDPatch.get_mod("customspheres").get_terminal_icon(global.currentlevel)	
 ]])
 	return src
 end)

@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" format=3 uid="uid://drodd6psj852b"]
+
+[ext_resource type="Script" uid="uid://d1nwwgcrner8b" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_2q73n"]
+[ext_resource type="PackedScene" uid="uid://dn74lsl0rsbdv" path="res://Scenes/Level Design/Enemies/enemy_crab.tscn" id="1_hkysl"]
+[ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="2_2q73n"]
+
+[sub_resource type="Resource" id="Resource_2q73n"]
+script = ExtResource("1_2q73n")
+display_asset_path = "\"models/crabnew.glb\""
+scale = "16"
+metadata/_custom_type_script = "uid://d1nwwgcrner8b"
+
+[resource]
+script = ExtResource("2_2q73n")
+scene_file = ExtResource("1_hkysl")
+display_descriptors = Array[ExtResource("1_2q73n")]([SubResource("Resource_2q73n")])
+classname = "E_CRAB"
+description = "errrm euuguh uh"
+meta_properties = Dictionary[String, Variant]({
+"color": Color(0.8, 0, 0, 1),
+"model": "{ \"path\": \"models/crabnew.glb\", \"scale\": 32 }",
+"size": AABB(-8, -20, -8, 8, 16, 8)
+})

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" format=3 uid="uid://cjn3xs8cwni4b"]
+
+[ext_resource type="Script" uid="uid://d1nwwgcrner8b" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_conkh"]
+[ext_resource type="PackedScene" uid="uid://drp06lf5g6nel" path="res://Scenes/Level Design/Stage Elements/glass_platform.tscn" id="1_rp42y"]
+[ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="2_conkh"]
+
+[sub_resource type="Resource" id="Resource_7y04l"]
+script = ExtResource("1_conkh")
+display_asset_path = "\"models/glass.glb\""
+scale = "64"
+metadata/_custom_type_script = "uid://d1nwwgcrner8b"
+
+[resource]
+script = ExtResource("2_conkh")
+scene_file = ExtResource("1_rp42y")
+display_descriptors = Array[ExtResource("1_conkh")]([SubResource("Resource_7y04l")])
+classname = "GLASS"
+description = "shatter sound"
+class_properties = Dictionary[String, Variant]({
+"mangle": Vector3(0, 0, 0)
+})
+meta_properties = Dictionary[String, Variant]({
+"color": Color(0, 0.861345, 0.883099, 1),
+"model": "{ \"path\": \"models/glass.glb\", \"scale\": 64 }",
+"size": AABB(-8, -20, -8, 8, 16, 8)
+})

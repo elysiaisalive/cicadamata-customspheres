@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDSolidClass" format=3 uid="uid://cosnwwpk6cb2e"]
+
+[ext_resource type="Script" uid="uid://5cow84q03m6a" path="res://addons/func_godot/src/fgd/func_godot_fgd_solid_class.gd" id="1_qbuhd"]
+[ext_resource type="Script" uid="uid://6r6y817gbnal" path="res://Scripts/Stage Elements/fizzer.gd" id="2_qbuhd"]
+
+[resource]
+script = ExtResource("1_qbuhd")
+collision_layer = 64
+collision_mask = 2
+script_class = ExtResource("2_qbuhd")
+classname = "func_fizzer"
+description = "Fizzy like cola! Or other soft drink"
+node_class = "Area3D"

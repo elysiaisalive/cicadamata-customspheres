@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" format=3 uid="uid://b1qaxmcw5hhrs"]
+
+[ext_resource type="Script" uid="uid://d1nwwgcrner8b" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_74ckw"]
+[ext_resource type="PackedScene" uid="uid://ceqf77j3gum1n" path="res://Scenes/Level Design/Enemies/enemy_bouncer.tscn" id="1_vfkfh"]
+[ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="2_74ckw"]
+
+[sub_resource type="Resource" id="Resource_74ckw"]
+script = ExtResource("1_74ckw")
+display_asset_path = "\"models/bouncer.glb\""
+scale = "32"
+metadata/_custom_type_script = "uid://d1nwwgcrner8b"
+
+[resource]
+script = ExtResource("2_74ckw")
+scene_file = ExtResource("1_vfkfh")
+display_descriptors = Array[ExtResource("1_74ckw")]([SubResource("Resource_74ckw")])
+classname = "E_BOUNCER"
+description = "errrm euuguh uh"
+meta_properties = Dictionary[String, Variant]({
+"color": Color(0.8, 0, 0, 1),
+"size": AABB(-8, -20, -8, 8, 16, 8)
+})

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDFile" format=3 uid="uid://cvlev7t86xhui"]
+
+[ext_resource type="Resource" path="WorldFGD.tres" id="1_7ky3n"]
+[ext_resource type="Resource" uid="uid://nayxb8n7see2" path="res://addons/func_godot/fgd/phong_base.tres" id="1_jdinm"]
+[ext_resource type="Resource" uid="uid://doo4ly322b4jc" path="res://addons/func_godot/fgd/vertex_merge_distance_base.tres" id="2_clvoe"]
+[ext_resource type="Resource" uid="uid://bdji3873bg32h" path="res://addons/func_godot/fgd/worldspawn.tres" id="2_lup8b"]
+[ext_resource type="Resource" path="ThreatFGD.tres" id="2_q2mm2"]
+[ext_resource type="Resource" uid="uid://bcdsueg5pysfq" path="res://addons/func_godot/fgd/cull_interior_faces.tres" id="3_bpelt"]
+[ext_resource type="Resource" uid="uid://b70vf4t5dc70t" path="res://addons/func_godot/fgd/func_geo.tres" id="3_kn8o1"]
+[ext_resource type="Resource" path="GoalFGD.tres" id="3_v07sj"]
+[ext_resource type="Resource" uid="uid://cxy7jnh6d7msn" path="res://addons/func_godot/fgd/func_detail.tres" id="4_clvoe"]
+[ext_resource type="Resource" uid="uid://ch3e0dix85uhb" path="res://addons/func_godot/fgd/func_detail_illusionary.tres" id="5_bpelt"]
+[ext_resource type="Resource" uid="uid://dg5x44cc7flew" path="res://addons/func_godot/fgd/func_illusionary.tres" id="6_hpe8d"]
+[ext_resource type="Script" uid="uid://drlmgulwbjwqu" path="res://addons/func_godot/src/fgd/func_godot_fgd_file.gd" id="28_exfmg"]
+
+[resource]
+script = ExtResource("28_exfmg")
+fgd_name = "CICADAMATA"
+base_fgd_files = Array[Resource]([ExtResource("1_7ky3n"), ExtResource("3_v07sj"), ExtResource("2_q2mm2")])
+entity_definitions = Array[Resource]([ExtResource("1_jdinm"), ExtResource("2_clvoe"), ExtResource("3_bpelt"), ExtResource("2_lup8b"), ExtResource("3_kn8o1"), ExtResource("4_clvoe"), ExtResource("5_bpelt"), ExtResource("6_hpe8d")])

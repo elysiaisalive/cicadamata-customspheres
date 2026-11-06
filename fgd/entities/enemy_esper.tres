@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" format=3 uid="uid://bwisf0kqqini4"]
+
+[ext_resource type="PackedScene" uid="uid://dmisibyx28kjn" path="res://Scenes/Level Design/Enemies/enemy_esper.tscn" id="1_mh28y"]
+[ext_resource type="Script" uid="uid://d1nwwgcrner8b" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_r5abb"]
+[ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="2_r5abb"]
+
+[sub_resource type="Resource" id="Resource_r5abb"]
+script = ExtResource("1_r5abb")
+display_asset_path = "\"models/Esper3.glb\""
+scale = "16"
+metadata/_custom_type_script = "uid://d1nwwgcrner8b"
+
+[resource]
+script = ExtResource("2_r5abb")
+scene_file = ExtResource("1_mh28y")
+display_descriptors = Array[ExtResource("1_r5abb")]([SubResource("Resource_r5abb")])
+classname = "E_ESPER"
+description = "errrm euuguh uh"
+meta_properties = Dictionary[String, Variant]({
+"color": Color(0.8, 0, 0, 1),
+"model": "{ \"path\": \"models/Esper3.glb\", \"scale\": 32 }",
+"size": AABB(-8, -20, -8, 8, 16, 8)
+})

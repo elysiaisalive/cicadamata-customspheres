@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" format=3 uid="uid://dw3emedo2nj26"]
+
+[ext_resource type="Script" uid="uid://d1nwwgcrner8b" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_3nvlg"]
+[ext_resource type="PackedScene" uid="uid://bpiphxyhnfj4n" path="res://Scenes/Level Design/Level Setup/star_power.tscn" id="1_mu6oh"]
+[ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="2_3nvlg"]
+
+[sub_resource type="Resource" id="Resource_kvms7"]
+script = ExtResource("1_3nvlg")
+display_asset_path = "\"models/star.glb\""
+scale = "32"
+metadata/_custom_type_script = "uid://d1nwwgcrner8b"
+
+[resource]
+script = ExtResource("2_3nvlg")
+scene_file = ExtResource("1_mu6oh")
+display_descriptors = Array[ExtResource("1_3nvlg")]([SubResource("Resource_kvms7")])
+classname = "STAR"
+description = "star"
+meta_properties = Dictionary[String, Variant]({
+"color": Color(0.8, 0.786667, 0, 1),
+"size": AABB(-8, -20, -8, 8, 16, 8)
+})

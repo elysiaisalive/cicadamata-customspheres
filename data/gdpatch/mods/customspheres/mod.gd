@@ -1,18 +1,34 @@
 class_name CustomSphereLoader extends Node
 
 
+signal compile_complete();
+
+
 var level_directory: String;
 var custom_levels: Dictionary[String, Variant];
 var func_godot_map: FuncGodotMap;
+var map_settings: FuncGodotMapSettings;
+var map_fgd: FuncGodotFGDFile;
+
+
+var __launch_args: PackedStringArray;
 var __compile_level_path: String;
 
 
+const HYPERPLANE_SIZE: float = 2048.0;
+const DEFAULT_FGD: FuncGodotFGDFile = preload("res://FuncGodot/CICADAMATA_fgd.tres");
+const DEFAULT_MAP_SETTINGS: TrenchBroomGameConfig = preload("res://FuncGodot/cicadamata_gamecfg.tres");
 const DEFAULT_LVL_CFG: Dictionary = {
 	"author": "DEMETER",
 	"world_title": "CUSTOM",
 	"world_colour": "FFFFFF",
 	"world_light_colour": "FFFFFF",
+	"fog_enabled": true,
+	"volumetric_fog_enabled": true,
+	"fog_skyaffect": 0.2,
+	"volumetric_fog_skyaffect": 0.2,
 	"music_override": "",
+	"fgd_override": "",
 	"pretitle": "CUSTOM",
 	"title": "Custom Level",
 	"transition": "whats mine is yours,\n\t\tand what's yours is mine",
@@ -26,20 +42,24 @@ const DEFAULT_LVL_CFG: Dictionary = {
 	"next_level": "",
 	"terminal_title": "+ CUSTOM.ONR",
 	"terminal_date": "??_???_7AS",
-	"terminal_text": "A column of ants, a hive of bees and a den of wolves.",
+	"terminal_text": "I met a traveller from an antique land",
 };
 
 
 func _ready()->void:
-	init_custom_levels();
+	__launch_args = OS.get_cmdline_args();
+
+	init_custom_dir();
+	init_fgd();
 	load_custom_levels();
 
 	if is_building_from_editor():
 		var _global: Node = get_autoload('global');
 
 		func_godot_map = FuncGodotMap.new();
-		func_godot_map.map_settings = load("res://FuncGodot/cicada_cfg.tres");
-		func_godot_map.hyperplane_size = 2048.0;
+		func_godot_map.map_settings = DEFAULT_MAP_SETTINGS.duplicate();
+		func_godot_map.map_settings.entity_fgd = map_fgd;
+		func_godot_map.hyperplane_size = self.HYPERPLANE_SIZE;
 
 		if _global:
 			get_tree().root.add_child(func_godot_map);
@@ -47,7 +67,33 @@ func _ready()->void:
 			build_map();
 
 
-func init_custom_levels()->void:
+func init_fgd()->void:##we have to have an internal fgd because loading external resources is wack yo
+	map_fgd = FuncGodotFGDFile.new();
+	map_fgd.fgd_name = 'fgd_custom';
+
+	var _fgd_path: String = GDPatch.get_mod_directory("customspheres").path_join("fgd/entities");
+	var _fgd_dir: DirAccess = DirAccess.open(_fgd_path);
+
+	if _fgd_dir:
+		_fgd_dir.list_dir_begin();
+
+		var _fgd_file: String = _fgd_dir.get_next();
+
+		while _fgd_file != "":
+			var _fgd_file_path: String = _fgd_path.path_join(_fgd_file);
+
+			if ResourceLoader.exists(_fgd_file_path) && _fgd_file.ends_with('.tres'):
+				var _try_load: Resource = load(_fgd_file_path);
+
+				if _try_load != null && _try_load is FuncGodotFGDEntityClass:
+					map_fgd.entity_definitions.append(_try_load);
+
+			_fgd_file = _fgd_dir.get_next();
+			
+		_fgd_dir.list_dir_end();
+
+
+func init_custom_dir()->void:
 	level_directory = GDPatch.get_mod_directory("customspheres").path_join("levels");
 	DirAccess.make_dir_absolute(level_directory);
 
@@ -122,7 +168,7 @@ func get_skybox(level:String)->ImageTexture:
 
 
 func get_nextlevel(level:String)->String:
-	return GDPatch.get_mod("customspheres").custom_levels[level].get('next_level', '');
+	return GDPatch.get_mod("customspheres").custom_levels[level].get('next_level', DEFAULT_LVL_CFG.next_level);
 
 
 func get_chapter_end(level:String)->String:
@@ -131,6 +177,22 @@ func get_chapter_end(level:String)->String:
 
 func get_icon(level:String)->ImageTexture:
 	return GDPatch.get_mod("customspheres").custom_levels[level].get('icon', load("res://Assets/UI/LevelIcons/bonus_icon.png"));
+
+
+func get_fog_enabled(level:String)->bool:
+	return GDPatch.get_mod("customspheres").custom_levels[level].get('fog_enabled', DEFAULT_LVL_CFG.fog_enabled);
+
+
+func get_volumetric_fog_enabled(level:String)->bool:
+	return GDPatch.get_mod("customspheres").custom_levels[level].get('volumetric_fog_enabled', DEFAULT_LVL_CFG.volumetric_fog_enabled);
+
+
+func get_env_fog_skyaffect(level:String)->ImageTexture:
+	return GDPatch.get_mod("customspheres").custom_levels[level].get('fog_skyaffect', DEFAULT_LVL_CFG.fog_skyaffect);
+
+
+func get_env_volumetric_fog_skyaffect(level:String)->ImageTexture:
+	return GDPatch.get_mod("customspheres").custom_levels[level].get('volumetric_fog_skyaffect', DEFAULT_LVL_CFG.volumetric_fog_skyaffect);
 
 
 func load_terminal_icon(level:String)->ImageTexture:
@@ -157,11 +219,38 @@ func load_icon(level:String)->ImageTexture:
 	return load_texture(_path.path_join("icon.png"));
 
 
+func load_fgd(level:String)->FuncGodotFGDFile:
+	return DEFAULT_FGD.duplicate();
+	var _dir: String = level_directory.path_join(level);
+	var _path: String = _dir.path_join("fgd.tres");
+
+	if !custom_levels[level].get("fgd_override").is_empty():
+		var _override_target: String = custom_levels[level].get("fgd_override");
+
+		_dir = level_directory.path_join(_override_target);
+		_path = _dir.path_join("fgd.tres");
+
+		return ResourceLoader.load(_path);
+
+	if !ResourceLoader.exists(_path):##fallback to mod fgd
+		var _fdir: String = GDPatch.get_mod_directory("customspheres");
+		var _fpath: String = _fdir.path_join("fgd/CICADAMATA_fgd.tres");
+
+		if ResourceLoader.exists(_fpath):
+			var _try_load: Resource = ResourceLoader.load(_fpath);
+
+			if _try_load:
+				return _try_load;
+	print('[CUSTOM_SPHERES] Error loading level FGD, using default');
+	return DEFAULT_FGD.duplicate();
+
+
 func load_config(level:String)->Dictionary:
 	var _dir: String = level_directory.path_join(level);
 	var _path: String = _dir.path_join("config.cfg");
 
-	if !FileAccess.file_exists(_path): 
+	if !FileAccess.file_exists(_path):
+		print('[CUSTOM_SPHERES] Error loading level cfg, not found');
 		return DEFAULT_LVL_CFG.duplicate();
 
 	var _file: FileAccess = FileAccess.open(_path, FileAccess.READ);
@@ -181,7 +270,8 @@ func load_sound(path:String)->AudioStreamOggVorbis:
 
 
 func load_texture(path:String)->ImageTexture:
-	if !FileAccess.file_exists(path): 
+	if !FileAccess.file_exists(path):
+		print('[CUSTOM_SPHERES] Error loading texture, not found'); 
 		return null;
 
 	var _bytes: PackedByteArray = FileAccess.get_file_as_bytes(path);
@@ -214,26 +304,30 @@ func load_custom_levels()->void:
 				if ResourceLoader.exists(_full_scene_path):
 					var _try_load: PackedScene = ResourceLoader.load(_full_scene_path);
 
-					if _try_load != null:
-						custom_levels[_sub_dir] = load_config(_sub_dir);
-						custom_levels[_sub_dir]["icon"] = load_icon(_sub_dir);
-						if custom_levels[_sub_dir].get("music_override").is_empty():
-							custom_levels[_sub_dir]["intromusic"] = load_sound(_folder_path.path_join("intro.ogg"));
-							custom_levels[_sub_dir]["levelmusic"] = load_sound(_folder_path.path_join("main.ogg"));
-						else:
-							var _override_path: String = level_directory.path_join(custom_levels[_sub_dir].get("music_override"));
-							custom_levels[_sub_dir]["intromusic"] = load_sound(_override_path.path_join("intro.ogg"));
-							custom_levels[_sub_dir]["levelmusic"] = load_sound(_override_path.path_join("main.ogg"));
+					if _try_load == null:
+						print('[CUSTOM_SPHERES] Error loading level, scene invalid');
+						return;
 
-						custom_levels[_sub_dir]["ambience"] = load_sound(_folder_path.path_join("ambience.ogg"));
-						custom_levels[_sub_dir]["skybox"] = load_skybox(_sub_dir);
-						custom_levels[_sub_dir]["terminal"] = load_terminal_icon(_sub_dir);
-						custom_levels[_sub_dir]["path"] = _full_scene_path;
+					custom_levels[_sub_dir] = load_config(_sub_dir);#always load the cfg first
+					custom_levels[_sub_dir]["path"] = _full_scene_path;
+					custom_levels[_sub_dir]["fgd"] = load_fgd(_sub_dir);
+					if custom_levels[_sub_dir].get("music_override").is_empty():
+						custom_levels[_sub_dir]["intromusic"] = load_sound(_folder_path.path_join("intro.ogg"));
+						custom_levels[_sub_dir]["levelmusic"] = load_sound(_folder_path.path_join("main.ogg"));
+					else:
+						var _override_path: String = level_directory.path_join(custom_levels[_sub_dir].get("music_override"));
+						custom_levels[_sub_dir]["intromusic"] = load_sound(_override_path.path_join("intro.ogg"));
+						custom_levels[_sub_dir]["levelmusic"] = load_sound(_override_path.path_join("main.ogg"));
+
+					custom_levels[_sub_dir]["icon"] = load_icon(_sub_dir);
+					custom_levels[_sub_dir]["skybox"] = load_skybox(_sub_dir);
+					custom_levels[_sub_dir]["ambience"] = load_sound(_folder_path.path_join("ambience.ogg"));
+					custom_levels[_sub_dir]["terminal"] = load_terminal_icon(_sub_dir);
 
 			_sub_dir = _main_dir.get_next();
 			
 		_main_dir.list_dir_end();
-		print(custom_levels)
+		print('[CUSTOM_SPHERES] Loaded: %s' % custom_levels);
 
 
 func get_autoload(autoload:String)->Node:
@@ -241,18 +335,38 @@ func get_autoload(autoload:String)->Node:
 
 
 func is_building_from_editor()->bool:
-	for cmdline_arg in OS.get_cmdline_args():
+	for cmdline_arg in __launch_args:
 		if cmdline_arg.contains("run_map::"):
-			print('EDITOR BUILD')
 			return true;
 
 	return false;
 
 
 func compile_map(path:String)->void:##ITS ALL A MESS!!!!
+	print("[CUSTOM_SPHERES] COMPILING MAP");
+
+	var _global: Node = get_autoload("global");
+	#get_tree().change_scene_to_node(func_godot_map);
+
+	if path.is_empty():
+		print('[CUSTOM_SPHERES] COMPILE ERROR, path invalid');
+		return;
+
 	# im just like ericw tools omg!!!
+	if !func_godot_map:
+		print('[CUSTOM_SPHERES] COMPILE ERROR, failed to copy FuncGodotMap');
+		return;
+
 	var _scene: PackedScene = PackedScene.new();
 	var _packed = _scene.pack(func_godot_map);
+
+	func_godot_map.queue_free();
+
+	if _packed != OK:
+		print('[CUSTOM_SPHERES] COMPILE ERROR, failed to pack FuncGodotMap');
+		_global._goto_menu();
+		return;
+
 	var _level_dir_path: String = level_directory.path_join(path);
 	var _level_scene_path: String = _level_dir_path.path_join(path + ".scn");
 	var _level_cfg_path: String = _level_dir_path.path_join("config.cfg");
@@ -262,28 +376,30 @@ func compile_map(path:String)->void:##ITS ALL A MESS!!!!
 
 	ResourceSaver.save(_scene, _level_scene_path, ResourceSaver.SaverFlags.FLAG_CHANGE_PATH);
 
-	if _packed == OK:
-		get_tree().change_scene_to_packed(_scene);
-		await get_tree().process_frame
-
-		var _global: Node = get_autoload("global");
-
-		_global.scene_path = _level_scene_path;
-		_global.currentlevel = _level_scene_path.get_file().get_basename();
-		custom_levels[path] = DEFAULT_LVL_CFG.duplicate();
 	#Generate default cfg
 	if !FileAccess.file_exists(_level_cfg_path):
 		var _file: FileAccess = FileAccess.open(_level_cfg_path, FileAccess.WRITE);
 		_file.store_string(JSON.stringify(DEFAULT_LVL_CFG.duplicate(), "\t"));
 
+	custom_levels[path] = load_config(path);
+	custom_levels[path]['path'] = _level_scene_path;
+	_global.scene_path = _level_scene_path;
+
+	__launch_args = PackedStringArray();
+	compile_complete.emit();
+
+	get_tree().change_scene_to_packed(_scene);
+	_global._goto_menu();
+
+	print('[CUSTOM_SPHERES] COMPILED MAP');
 
 # https://func-godot.github.io/func_godot_docs/FuncGodot%20Manual/FuncGodot%20Manual.html
 func build_map()->void:
-	print("BUILDING MAP")
+	print("[CUSTOM_SPHERES] BUILDING MAP");
 
-	func_godot_map.build_complete.connect(run_map);
+	func_godot_map.build_complete.connect(run_and_compile, ConnectFlags.CONNECT_ONE_SHOT);
 
-	for cmdline_arg in OS.get_cmdline_args():
+	for cmdline_arg in __launch_args:
 		if cmdline_arg.contains("run_map::"):
 			var arg_arr := cmdline_arg.split("::");
 
@@ -291,9 +407,16 @@ func build_map()->void:
 				return;
 			__compile_level_path = arg_arr[2].get_basename();
 			func_godot_map.global_map_file = arg_arr[1];
-			func_godot_map.build();
+
+			if !__compile_level_path.is_empty():
+				func_godot_map.build();
 
 
-func run_map()->void:##hack hack hack
-	print("RUNNING MAP")
+func run_and_compile()->void:
 	compile_map(__compile_level_path);
+
+
+func set_owner_recursive(node:Node, root:Node)->void:
+	for child in node.get_children():
+		child.owner = root;
+		set_owner_recursive(child, root);

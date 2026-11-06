@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" format=3 uid="uid://dynm3tuomdid5"]
+
+[ext_resource type="Script" uid="uid://d1nwwgcrner8b" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_sdcaq"]
+[ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="2_a2gd8"]
+
+[resource]
+script = ExtResource("2_a2gd8")
+classname = "ENV_CUSTOM"
+description = "the environment"
+class_properties = Dictionary[String, Variant]({
+"skybox_path": ""
+})
+meta_properties = Dictionary[String, Variant]({
+"color": Color(0.03137255, 0.20392157, 0.8, 1),
+"size": AABB(-8, -8, -8, 8, 8, 8)
+})
+node_groups = Array[String](["ENV"])

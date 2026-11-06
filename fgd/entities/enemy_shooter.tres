@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" format=3 uid="uid://bgauvusq4d5ej"]
+
+[ext_resource type="PackedScene" uid="uid://3q04wlsmiaht" path="res://Scenes/Level Design/Enemies/enemy_shooter.tscn" id="1_034h7"]
+[ext_resource type="Script" uid="uid://d1nwwgcrner8b" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_fbfk6"]
+[ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="1_wehne"]
+
+[sub_resource type="Resource" id="Resource_fbfk6"]
+script = ExtResource("1_fbfk6")
+display_asset_path = "\"models/Turret.glb\""
+scale = "32"
+metadata/_custom_type_script = "uid://d1nwwgcrner8b"
+
+[resource]
+script = ExtResource("1_wehne")
+scene_file = ExtResource("1_034h7")
+display_descriptors = Array[ExtResource("1_fbfk6")]([SubResource("Resource_fbfk6")])
+classname = "E_SHOOTER"
+description = "errrm euuguh uh"
+meta_properties = Dictionary[String, Variant]({
+"color": Color(0.8, 0, 0, 1),
+"model": "{ \"path\": \"models/Turret.glb\", \"scale\": 32 }",
+"size": AABB(-8, -20, -8, 8, 16, 8)
+})

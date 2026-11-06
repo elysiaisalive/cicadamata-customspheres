@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDSolidClass" format=3 uid="uid://subt5ba0rf1m"]
+
+[ext_resource type="Script" uid="uid://5cow84q03m6a" path="res://addons/func_godot/src/fgd/func_godot_fgd_solid_class.gd" id="1_hn7i2"]
+[ext_resource type="Script" uid="uid://xducuh2ocm1m" path="res://Scripts/Stage Elements/lava.gd" id="2_hn7i2"]
+
+[resource]
+script = ExtResource("1_hn7i2")
+collision_layer = 8
+collision_mask = 7
+script_class = ExtResource("2_hn7i2")
+classname = "func_lava"
+description = "buring..."
+node_class = "Area3D"

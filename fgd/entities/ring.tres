@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" format=3 uid="uid://btgns7l47snib"]
+
+[ext_resource type="Script" uid="uid://d1nwwgcrner8b" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_getx4"]
+[ext_resource type="PackedScene" uid="uid://1k8rr5qhoitn" path="res://Scenes/Level Design/Stage Elements/ring.tscn" id="2_getx4"]
+[ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="3_k3dwg"]
+
+[sub_resource type="Resource" id="Resource_7y04l"]
+script = ExtResource("1_getx4")
+display_asset_path = "\"models/ring.glb\""
+scale = "32"
+metadata/_custom_type_script = "uid://d1nwwgcrner8b"
+
+[resource]
+script = ExtResource("3_k3dwg")
+scene_file = ExtResource("2_getx4")
+display_descriptors = Array[ExtResource("1_getx4")]([SubResource("Resource_7y04l")])
+classname = "RING"
+description = "		ring
+ring			ring
+		ring "
+class_properties = Dictionary[String, Variant]({
+"mangle": Vector3(0, 0, 0)
+})
+auto_apply_to_matching_node_properties = true
+meta_properties = Dictionary[String, Variant]({
+"color": Color(0.8, 0.8, 0.8, 1),
+"model": "{ \"path\": \"models/ring.glb\", \"scale\": 32 }",
+"size": AABB(-8, -8, -8, 8, 8, 8)
+})

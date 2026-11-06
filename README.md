@@ -10,13 +10,14 @@ PROVIDES ACCESS TO USER GENERATED SPHERES
 ## + BASIC USAGE
 The mod loads custom levels located in `GDPatch/mods/customspheres/levels`.
 Levels must have a valid scene file created by Godot or the mods compiler tools.
+Levels can be standalone `.scn` or `.tscn` files, or named folders containing their respective configs.
 
 ## + QUICKSTART
 To create a custom level, you will need the **CICADAMATA FGD**, and [Trenchbroom 2025.4+](https://github.com/TrenchBroom/TrenchBroom/releases#release-v2025.4)
 
-This mod ships with a FGD preconfigured for the game in `ccda_fgd`.
-
-Once you have the FGD extracted and Trenchbroom downloaded, copy the contents of the FGD to `AppData/Roaming/TrenchBroom/games/Cicadamata`.
+This mod ships with a FGD manually preconfigured for the compiler under `CICADAMATA/GDPatch/mods/customspheres/fgd`.
+\
+It is **Not Recommended** that you touch this folder unless you are experienced with Godot Resources and FuncGodot.
 
 For more information on mapping for Trenchbroom, refer to the [official documentation](https://trenchbroom.github.io/manual/latest/)
 
@@ -43,6 +44,10 @@ Once you run the compile tools, the mod will autogenerate a scene file and a con
 | world_title | string | The name of the world as seen on the deploy screen and other UI elements
 | world_colour | string | Must be a valid colour hexcode. Changes the color as seen on the pause menu, and other UI elements
 | world_light_colour | string | Must be a valid colour hexcode. Changes the levels sun color
+| fog_enabled | boolean | Controls if fog is enabled.
+| volumetric_fog_enabled | boolean | Controls if volumetric fog is enabled.
+| fog_skyaffect | number | A range of `0.0 - 1.0`. Changes how much fog obscures the skybox
+| volumetric_fog_skyaffect | number | A range of `0.0 - 1.0`. Changes how much volumetric fog obscures the skybox
 | music_override | string | Useful for level packs. Points to another levels song to use instead of providing `intro.ogg` or `main.ogg` files
 | pretitle | string | The name of the sphere
 | title | string | The name of the level
@@ -54,6 +59,10 @@ Once you run the compile tools, the mod will autogenerate a scene file and a con
 | terminal_title | string | The title of your terminal e.x "+ CUSTOM.ONR" |
 | terminal_date | string | The date of your terminal e.x "DD_MMM_7AS" |
 | terminal_text | string | The text of your terminal |
+| red_score | number | CCDA Rank |
+| dmnd_score | number | Diamond Rank |
+| gold_score | number | Gold Rank |
+| slvr_score | number | Silver Rank |
 
 #### + Custom Images
 You can provide custom icons and thumbnails for levels by adding an `icon.png` and a `thumbnail.png`.
@@ -75,7 +84,15 @@ You can provide a `terminal.png` for the icon that appears your terminal screens
 - Group detailed brushwork with `func_detail`.
 - Create all brushes with the `__tb_empty` texture, apply textures to all visible brush faces, and then replace all instances of `__tb_empty` with the 'skip' texture. This workflow makes it much easier to optimize geometry and unseen faces.
 
+### + Common Errors // Incompatibilities
+If you run into a black screen upon compiling, your level is most likely not set up correctly. Check the console output in Trenchbroom for more information, as well as make sure your level has a Ship.
+
+This mod uses heavy script patching and is quite WIP, so it may be incompatible with other mods that do lots of patching.
+
+Pull requests are always welcome.
+
 #### + Caveats // TBD // Bugs
+- Scores do not save
 - Player leaderboards are not available
 - Custom map textures are currently not possible
 - Music will restart upon deployment in a level after transitioning to `next_level`

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDModelPointClass" format=3 uid="uid://dv4iigecd4luw"]
+
+[ext_resource type="PackedScene" uid="uid://dgkogoquwkxg7" path="res://Scenes/Level Design/Level Setup/player.tscn" id="1_cy0m6"]
+[ext_resource type="Script" uid="uid://d1nwwgcrner8b" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_f1egc"]
+[ext_resource type="Script" uid="uid://ldfqjtq0br35" path="res://addons/func_godot/src/fgd/func_godot_fgd_model_point_class.gd" id="1_hcolm"]
+
+[resource]
+script = ExtResource("1_hcolm")
+target_map_editor = 1
+scale_expression = "48"
+scene_file = ExtResource("1_cy0m6")
+classname = "player"
+description = "spawns an unarmed player"
+meta_properties = Dictionary[String, Variant]({
+"color": Color(0.8, 0.8, 0.8, 1),
+"model": "{\"path\": \"player.glb\", \"scale\": 48 }",
+"size": AABB(-8, -8, -8, 8, 8, 8)
+})

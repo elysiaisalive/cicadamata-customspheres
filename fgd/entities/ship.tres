@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDModelPointClass" format=3 uid="uid://dnplaychykqtq"]
+
+[ext_resource type="Script" uid="uid://d1nwwgcrner8b" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_trnxo"]
+[ext_resource type="Script" uid="uid://ldfqjtq0br35" path="res://addons/func_godot/src/fgd/func_godot_fgd_model_point_class.gd" id="3_o1up3"]
+[ext_resource type="Script" path="scripts/ship_spawn.gd" id="3_q3hig"]
+
+[sub_resource type="Resource" id="Resource_aj14f"]
+script = ExtResource("1_trnxo")
+display_asset_path = "\"models/ship.glb\""
+scale = "32"
+metadata/_custom_type_script = "uid://d1nwwgcrner8b"
+
+[resource]
+script = ExtResource("3_o1up3")
+target_map_editor = 1
+script_class = ExtResource("3_q3hig")
+display_descriptors = Array[ExtResource("1_trnxo")]([SubResource("Resource_aj14f")])
+classname = "ship"
+description = "set sail"
+meta_properties = Dictionary[String, Variant]({
+"color": Color(0.8, 0.8, 0.8, 1),
+"model": "{ \"path\": \"models/ship.glb\", \"scale\": 32 }",
+"size": AABB(-8, -8, -8, 8, 8, 8)
+})
