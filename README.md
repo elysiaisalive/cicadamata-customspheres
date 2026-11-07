@@ -39,7 +39,7 @@ For more information on mapping for Trenchbroom, refer to the [official document
 
 Once you run the compile tools, the mod will generate a scene file and a config file located under `CICADAMATA/GDPatch/mods/customspheres/levels/mycustomlevel`
 
-### + Customizing your level
+## + Customizing your level
 #### Config Properties
 | key | value | description |
 | :-: | :-: | :-- |
@@ -81,7 +81,7 @@ For custom terminal text, see the above config properties chart.
 
 You can provide a `terminal.png` for the icon that appears your terminal screens. It is recommended to author your icons at `1024x1024`, and white monochromatic to keep consistency with the games style.
 
-### + Level Design Tips / Considerations
+### + Level Design Tips // Considerations
 - Keep grid size at `32x` for most main level geometry.
 - Keep func_spikes at a maximum of `16-32` units tall.
 - Group non-detail brush geometry together with `func_geo`. This creates an occluder roughly the size of the brush group. This is incredibly important for optimizing levels with interiors.
