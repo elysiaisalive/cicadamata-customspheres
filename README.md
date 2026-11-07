@@ -7,15 +7,18 @@ PROVIDES ACCESS TO USER GENERATED SPHERES
 3. Unzip the mod into your mods folder located in (`GDPatch/mods/customspheres`)
 4. You can now play custom levels!
 
+## + WARNING
+This mod is work-in-progress and may be incompatible with other mods and may cause random crashes. It is recommended to back up your saves before using this mod.
+
 ## + BASIC USAGE
 The mod loads custom levels located in `GDPatch/mods/customspheres/levels`.
 Levels must have a valid scene file created by Godot or the mods compiler tools.
 Levels can be standalone `.scn` or `.tscn` files, or named folders containing their respective scene file and configs.
 
 ## + QUICKSTART
-To create a custom level, you will need the **CICADAMATA FGD**, and [Trenchbroom 2025.4+](https://github.com/TrenchBroom/TrenchBroom/releases#release-v2025.4)
+To create a custom level, you will need [Trenchbroom 2025.4+](https://github.com/TrenchBroom/TrenchBroom/releases#release-v2025.4)
 
-This mod ships with a FGD manually preconfigured for the compiler under `CICADAMATA/GDPatch/mods/customspheres/fgd`.
+This mod ships with an FGD preconfigured for the compiler under `CICADAMATA/GDPatch/mods/customspheres/fgd`.
 \
 It is **Not Recommended** that you touch this folder unless you are experienced with Godot Resources and FuncGodot.
 
@@ -86,11 +89,17 @@ You can provide a `terminal.png` for the icon that appears your terminal screens
 - Create all brushes with the `__tb_empty` texture, apply textures to all visible brush faces, and then replace all instances of `__tb_empty` with the 'skip' texture. This workflow makes it much easier to optimize geometry and unseen faces.
 
 ### + Common Errors // Incompatibilities
-If you run into a black screen upon compiling, your level is most likely not set up correctly. Check the console output in Trenchbroom for more information, as well as make sure your level has a Ship.
+#### !my level loads into a black screen!
+Your level is most likely not set up correctly. Check the console output in Trenchbroom for more information, as well as make sure your level has a Ship.
 
-If your level does not show up in the custom menu, ensure your level has a unique name that does not conflict with any other level, as the compiler will overwrite any scene with the same name.
+#### !my level isn't showing up in the menu!
+Ensure your level has a unique name that does not conflict with any other level, as the compiler will overwrite any scene with the same name.
 
+#### !one of my mods is broken!
 This mod uses heavy script patching and is quite WIP, so it may be incompatible with other mods that do lots of patching.
+
+#### !my level is dark and has no lighting!
+Ensure your level has an env.
 
 Pull requests are always welcome.
 
