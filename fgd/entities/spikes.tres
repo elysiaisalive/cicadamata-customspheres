@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" format=3 uid="uid://i5efn2r3xilw"]
+
+[ext_resource type="Script" uid="uid://d1nwwgcrner8b" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_sn8pr"]
+[ext_resource type="PackedScene" uid="uid://dw1qtefv0b4hn" path="res://Scenes/Level Design/Stage Elements/spikes.tscn" id="2_sn8pr"]
+[ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="3_8jixy"]
+
+[resource]
+script = ExtResource("3_8jixy")
+scene_file = ExtResource("2_sn8pr")
+classname = "SPIKES"
+description = "jume"
+class_properties = Dictionary[String, Variant]({
+"spike_scale": Vector3(1, 1, 1)
+})
+auto_apply_to_matching_node_properties = true
+meta_properties = Dictionary[String, Variant]({
+"color": Color(0.812709, 0.719908, 0.839621, 1),
+"size": AABB(-8, -20, -8, 8, 8, 8)
+})

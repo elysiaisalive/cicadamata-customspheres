@@ -100,13 +100,17 @@ func init_custom_dir()->void:
 
 
 func init_levelbutton(node, level:String)->void:
+	node.level = level;
+	node.custom = true;
+	node.forceunlock = true;
+	node.hiderank = false;
 	node.get_node('TextureRect').texture = GDPatch.get_mod("customspheres").load_thumbnail(level);
 	node.get_node('WorldIcon').texture = GDPatch.get_mod("customspheres").load_icon(level);
 	node.get_node('LvlPreTitle').text = GDPatch.get_mod("customspheres").custom_levels[level].pretitle;
 	node.get_node('LvlName').text = GDPatch.get_mod("customspheres").custom_levels[level].title;
 	node.get_node('LvlScore').text = GDPatch.get_mod("customspheres").custom_levels[level].author;
-	node.get_node('LvlScore').modulate = GDPatch.get_mod("customspheres").get_worldcolour(level);
-	node.get_node('LevelButton').color = GDPatch.get_mod("customspheres").get_worldcolour(level);
+	node.get_node('LvlScore').modulate = GDPatch.get_mod("customspheres").get_world_colour(level);
+	node.get_node('LevelButton').color = GDPatch.get_mod("customspheres").get_world_colour(level);
 	node.get_node('LevelButton').pressed.connect(node.get_node("../../..")._on_lvl_pressed.bind(level, false));
 	node.get_node('LevelButton').focus_entered.connect(node.get_node("../../..")._on_lvl_focus.bind(level, false));
 
@@ -124,7 +128,7 @@ func get_shipscreen(level:String)->String:
 	});
 
 
-func get_worldcolour(level:String)->Color:
+func get_world_colour(level:String)->Color:
 	var _worldcol: String = GDPatch.get_mod("customspheres").custom_levels[level].get('world_colour', DEFAULT_LVL_CFG.world_colour);
 	var _col: Color = Color.html(_worldcol) if Color.html_is_valid(_worldcol) else Color.WHITE;
 	return _col;
