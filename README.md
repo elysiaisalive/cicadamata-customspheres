@@ -104,6 +104,9 @@ Ensure your level has an env.
 Pull requests are always welcome.
 
 #### + Caveats // TBD // Bugs
+- Moving platforms do not have sound or particles
+- Rings are  not resizeable yet
+- Rotating certain entities does not work yet
 - Scores do not save
 - Player leaderboards are not available
 - Custom map textures are currently not possible
