@@ -18,7 +18,7 @@ classname = "E_BIRD"
 description = "errrm euuguh uh"
 class_properties = Dictionary[String, Variant]({
 "bird_left": false,
-"bird_radius": 0.0
+"bird_radius": 1.0
 })
 meta_properties = Dictionary[String, Variant]({
 "color": Color(0.8, 0, 0, 1),

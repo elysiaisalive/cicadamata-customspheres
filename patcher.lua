@@ -199,7 +199,7 @@ end)
 GDPatch.patch_script_as_text("Scripts/UI/level_complete.gdc", function(ctx, src)
 	src = src:gsub(
 		utils.escape([[pixelmat.set_shader_parameter("colorr", _blehcolor)]]),
-		[[%1
+		[[%0
 	if GDPatch.get_mod("customspheres").custom_levels.has(global.currentlevel):
 		var _col: Color = GDPatch.get_mod("customspheres").get_worldcolour(global.currentlevel)
 

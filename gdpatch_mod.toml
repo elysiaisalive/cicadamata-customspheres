@@ -4,4 +4,4 @@ id = "customspheres"
 name = "CustomSpheres"
 version = "1.0.0"
 authors = ["skyler"]
-description = "Adds the ability to load and play custom spheres"
+description = "Adds the ability to load and play custom levels"

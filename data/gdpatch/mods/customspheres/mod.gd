@@ -264,6 +264,10 @@ func load_config(level:String)->Dictionary:
 
 
 func load_sound(path:String)->AudioStreamOggVorbis:
+	if !FileAccess.file_exists(path):
+		print('[CUSTOM_SPHERES] Error loading audio, not found'); 
+		return null;
+
 	var _music: AudioStreamOggVorbis = AudioStreamOggVorbis.load_from_file(path);
 	_music.loop = true;
 	return _music;
@@ -360,7 +364,7 @@ func compile_map(path:String)->void:##ITS ALL A MESS!!!!
 	var _scene: PackedScene = PackedScene.new();
 	var _packed = _scene.pack(func_godot_map);
 
-	func_godot_map.queue_free();
+	func_godot_map.clear_children();
 
 	if _packed != OK:
 		print('[CUSTOM_SPHERES] COMPILE ERROR, failed to pack FuncGodotMap');
@@ -381,14 +385,10 @@ func compile_map(path:String)->void:##ITS ALL A MESS!!!!
 		var _file: FileAccess = FileAccess.open(_level_cfg_path, FileAccess.WRITE);
 		_file.store_string(JSON.stringify(DEFAULT_LVL_CFG.duplicate(), "\t"));
 
-	custom_levels[path] = load_config(path);
-	custom_levels[path]['path'] = _level_scene_path;
-	_global.scene_path = _level_scene_path;
+	load_custom_levels();#call reload on compile, this is very dirty
 
 	__launch_args = PackedStringArray();
 	compile_complete.emit();
-
-	get_tree().change_scene_to_packed(_scene);
 	_global._goto_menu();
 
 	print('[CUSTOM_SPHERES] COMPILED MAP');
@@ -397,7 +397,8 @@ func compile_map(path:String)->void:##ITS ALL A MESS!!!!
 func build_map()->void:
 	print("[CUSTOM_SPHERES] BUILDING MAP");
 
-	func_godot_map.build_complete.connect(run_and_compile, ConnectFlags.CONNECT_ONE_SHOT);
+	func_godot_map.build_complete.connect(_on_build_ok, ConnectFlags.CONNECT_ONE_SHOT);
+	func_godot_map.build_failed.connect(_on_build_fail, ConnectFlags.CONNECT_ONE_SHOT);
 
 	for cmdline_arg in __launch_args:
 		if cmdline_arg.contains("run_map::"):
@@ -412,8 +413,13 @@ func build_map()->void:
 				func_godot_map.build();
 
 
-func run_and_compile()->void:
-	compile_map(__compile_level_path);
+func _on_build_ok()->void:
+	print("[CUSTOM_SPHERES] MAP BUILD OK");
+	compile_map(__compile_level_path);	
+
+
+func _on_build_fail()->void:
+	print("[CUSTOM_SPHERES] ERROR BUILDING MAP");
 
 
 func set_owner_recursive(node:Node, root:Node)->void:

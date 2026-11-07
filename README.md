@@ -10,7 +10,7 @@ PROVIDES ACCESS TO USER GENERATED SPHERES
 ## + BASIC USAGE
 The mod loads custom levels located in `GDPatch/mods/customspheres/levels`.
 Levels must have a valid scene file created by Godot or the mods compiler tools.
-Levels can be standalone `.scn` or `.tscn` files, or named folders containing their respective configs.
+Levels can be standalone `.scn` or `.tscn` files, or named folders containing their respective scene file and configs.
 
 ## + QUICKSTART
 To create a custom level, you will need the **CICADAMATA FGD**, and [Trenchbroom 2025.4+](https://github.com/TrenchBroom/TrenchBroom/releases#release-v2025.4)
@@ -34,7 +34,7 @@ For more information on mapping for Trenchbroom, refer to the [official document
 3. Set parameters to `run_map::${MAP_DIR_PATH}/${MAP_FULL_NAME}::${MAP_BASE_NAME}`
 4. You can now run the compile tools and start testing your new map!
 
-Once you run the compile tools, the mod will autogenerate a scene file and a config file located under `CICADAMATA/GDPatch/mods/customspheres/levels/mycustomlevel`
+Once you run the compile tools, the mod will generate a scene file and a config file located under `CICADAMATA/GDPatch/mods/customspheres/levels/mycustomlevel`
 
 ### + Customizing your level
 #### Config Properties
@@ -86,6 +86,8 @@ You can provide a `terminal.png` for the icon that appears your terminal screens
 
 ### + Common Errors // Incompatibilities
 If you run into a black screen upon compiling, your level is most likely not set up correctly. Check the console output in Trenchbroom for more information, as well as make sure your level has a Ship.
+
+If your level does not show up in the custom menu, ensure your level has a unique name that does not conflict with any other level, as the compiler will overwrite any scene with the same name.
 
 This mod uses heavy script patching and is quite WIP, so it may be incompatible with other mods that do lots of patching.
 
