@@ -186,6 +186,9 @@ GDPatch.patch_script_as_text("Scripts/FX/world_environment.gdc", function(ctx, s
 		var _volumetric_fog_affect: float = GDPatch.get_mod("customspheres").get_env_volumetric_fog_skyaffect(global.currentlevel);
 		self.get_environment().set_volumetric_fog_sky_affect(_volumetric_fog_affect);
 
+		var _sky_brightness: float = GDPatch.get_mod("customspheres").get_env_skybox_brightness(global.currentlevel);
+		self.get_environment().get_sky().get_material().energy_multiplier = _sky_brightness;
+
 		var _amb: AudioStreamPlayer = self.find_child("amb");
 		var _amb_sfx: AudioStream = GDPatch.get_mod("customspheres").get_ambience(global.currentlevel);
 		_amb.stream = _amb_sfx;

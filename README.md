@@ -44,6 +44,7 @@ Once you run the compile tools, the mod will generate a scene file and a config 
 | world_title | string | The name of the world as seen on the deploy screen and other UI elements
 | world_colour | string | Must be a valid colour hexcode. Changes the color as seen on the pause menu, and other UI elements
 | world_light_colour | string | Must be a valid colour hexcode. Changes the levels sun color
+| skybox_brightness | number | A range of `0.0 - 1.0`. Changes how bright the skybox is.
 | fog_enabled | boolean | Controls if fog is enabled.
 | volumetric_fog_enabled | boolean | Controls if volumetric fog is enabled.
 | fog_skyaffect | number | A range of `0.0 - 1.0`. Changes how much fog obscures the skybox

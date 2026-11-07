@@ -27,6 +27,7 @@ const DEFAULT_LVL_CFG: Dictionary = {
 	"volumetric_fog_enabled": true,
 	"fog_skyaffect": 0.2,
 	"volumetric_fog_skyaffect": 0.2,
+	"skybox_brightness": 1.0,
 	"music_override": "",
 	"fgd_override": "",
 	"pretitle": "CUSTOM",
@@ -187,12 +188,16 @@ func get_volumetric_fog_enabled(level:String)->bool:
 	return GDPatch.get_mod("customspheres").custom_levels[level].get('volumetric_fog_enabled', DEFAULT_LVL_CFG.volumetric_fog_enabled);
 
 
-func get_env_fog_skyaffect(level:String)->ImageTexture:
+func get_env_fog_skyaffect(level:String)->float:
 	return GDPatch.get_mod("customspheres").custom_levels[level].get('fog_skyaffect', DEFAULT_LVL_CFG.fog_skyaffect);
 
 
-func get_env_volumetric_fog_skyaffect(level:String)->ImageTexture:
+func get_env_volumetric_fog_skyaffect(level:String)->float:
 	return GDPatch.get_mod("customspheres").custom_levels[level].get('volumetric_fog_skyaffect', DEFAULT_LVL_CFG.volumetric_fog_skyaffect);
+
+
+func get_env_skybox_brightness(level:String)->float:
+	return GDPatch.get_mod("customspheres").custom_levels[level].get('skybox_brightness', DEFAULT_LVL_CFG.skybox_brightness);
 
 
 func load_terminal_icon(level:String)->ImageTexture:
@@ -350,7 +355,6 @@ func compile_map(path:String)->void:##ITS ALL A MESS!!!!
 	print("[CUSTOM_SPHERES] COMPILING MAP");
 
 	var _global: Node = get_autoload("global");
-	#get_tree().change_scene_to_node(func_godot_map);
 
 	if path.is_empty():
 		print('[CUSTOM_SPHERES] COMPILE ERROR, path invalid');
