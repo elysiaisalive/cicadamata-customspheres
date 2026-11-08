@@ -18,18 +18,20 @@ Levels can be standalone `.scn` or `.tscn` files, or named folders containing th
 ## + QUICKSTART
 To create a custom level, you will need [Trenchbroom 2025.4+](https://github.com/TrenchBroom/TrenchBroom/releases#release-v2025.4)
 
-This mod ships with an FGD preconfigured for the compiler under `CICADAMATA/GDPatch/mods/customspheres/fgd`.
+This mod ships with an FGD preconfigured for Trenchbroom under `CICADAMATA/GDPatch/mods/customspheres/trenchbroom` and an internal FGD resource for the map compiler located under `customspheres/fgd`
 \
-It is **Not Recommended** that you touch this folder unless you are experienced with Godot Resources and FuncGodot.
+It is **Not Recommended** that you touch the FGD resources unless you know what you are doing.
 
 For more information on mapping for Trenchbroom, refer to the [official documentation](https://trenchbroom.github.io/manual/latest/)
 
 #### + Setting up Trenchbroom
-1. Use [GDRE Tools](https://github.com/GDRETools/gdsdecomp) or [PCKExplorer](https://github.com/DmitriySalnikov/GodotPCKExplorer) to decompile and extract necessary resources from the game.
-2. Extract the textures located under `FuncGodot/textures`
-3. For optional editor display of mapping entities, extract the models located under `FuncGodot/models`
-4. Create a folder i.e `CicadamataFGD` to hold your FGD assets, and place the textures and models folders inside
-5. Set your game path to your FGD folder in Trenchbroom under `View > Preferences > Cicadamata > Game Path`
+1. Install Trenchbroom.
+2. Copy the contents of `customspheres/trenchbroom` into a new folder into `AppData/Roaming/Trenchbroom/games`
+3. Use [GDRE Tools](https://github.com/GDRETools/gdsdecomp) or [PCKExplorer](https://github.com/DmitriySalnikov/GodotPCKExplorer) to decompile and extract necessary resources from the game.
+4. Extract the textures located under `FuncGodot/textures`
+5. For optional editor display of mapping entities, extract the models located under `FuncGodot/models`, or optionally provide your own. Your models will have to be exported as `.glb` and named the same as their counterpart under `customspheres/fgd/entities`
+6. Create a folder i.e `CicadamataFGD` to hold your FGD assets, and place the textures and models folders inside
+7. Set your game path to your FGD folder in Trenchbroom under `View > Preferences > Cicadamata > Game Path`
 
 #### + Setting up compiler tools
 1. Navigate to `Run > Compile Map`
