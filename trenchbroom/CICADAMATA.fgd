@@ -107,18 +107,18 @@ ring			ring
 		0 : "No"
 		1 : "Yes"
 	]
-	bird_radius(float) : "" : "0.0"
+	bird_radius(float) : "DO NOT MAKE THIS 0, IT WILL BREAK THE GAME AT 0" : "1.0"
 ]
 
 @PointClass color(204 0 0) size(-8.0 -20.0 -8.0, 8.0 16.0 8.0) model({ "path": "models/bouncer.glb", "scale": 32 }) = E_BOUNCER : "errrm euuguh uh" []
 
-@PointClass color(204 0 0) model({ "path": "models/crabnew.glb", "scale": 16 }) size(-8.0 -20.0 -8.0, 8.0 16.0 8.0) = E_CRAB : "errrm euuguh uh" []
+@PointClass color(204 0 0) model({ "path": "models/crab.glb", "scale": 16 }) size(-8.0 -20.0 -8.0, 8.0 16.0 8.0) = E_CRAB : "errrm euuguh uh" []
 
-@PointClass color(204 0 0) model({ "path": "models/Esper3.glb", "scale": 16 }) size(-8.0 -20.0 -8.0, 8.0 16.0 8.0) = E_ESPER : "errrm euuguh uh" []
+@PointClass color(204 0 0) model({ "path": "models/esper.glb", "scale": 16 }) size(-8.0 -20.0 -8.0, 8.0 16.0 8.0) = E_ESPER : "errrm euuguh uh" []
 
 @PointClass color(204 0 0) model({ "path": "models/blossom.glb", "scale": 32 }) size(-8.0 -20.0 -8.0, 8.0 16.0 8.0) = E_FLOWER : "errrm euuguh uh" []
 
-@PointClass color(204 0 0) model({ "path": "models/Turret.glb", "scale": 32 }) size(-8.0 -20.0 -8.0, 8.0 16.0 8.0) = E_SHOOTER : "errrm euuguh uh" []
+@PointClass color(204 0 0) model({ "path": "models/turret.glb", "scale": 32 }) size(-8.0 -20.0 -8.0, 8.0 16.0 8.0) = E_SHOOTER : "errrm euuguh uh" []
 
 @PointClass color(204 0 0) model({ "path": "models/spider.glb", "scale": 32 }) size(-8.0 -20.0 -8.0, 8.0 16.0 8.0) = E_SPIDER : "errrm euuguh uh" []
 @BaseClass size(-8.0 -8.0 -8.0, 8.0 8.0 8.0) color(204 204 204) = Phong

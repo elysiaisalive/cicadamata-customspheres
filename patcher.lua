@@ -83,7 +83,9 @@ GDPatch.patch_script_as_text("Scripts/System/global.gdc", function(ctx, src)
 		currentlevel = _lvl;
 		_leveldata(_lvl);
 		if !simple: Audio.sound_play_ui(Audio.sndUIGameStart);
-		LoadingScreen.start_loading(GDPatch.get_mod("customspheres").custom_levels.get(_lvl).path, stop_music, simple);
+
+		GDPatch.get_mod("customspheres").build_and_run_map(_lvl);
+		LoadingScreen.start_loading(GDPatch.get_mod("customspheres").get_temp_path(), stop_music, simple);
 		return;
 ]])
 	return src

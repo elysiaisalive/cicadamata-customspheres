@@ -4,42 +4,46 @@ PROVIDES ACCESS TO USER GENERATED SPHERES
 ## + INSTALLATION
 1. Install [GDPatch](https://gdpatch.dev/)
 2. [Download this repo as a .zip](https://github.com/elysiaisalive/cicadamata-customspheres/archive/refs/heads/master.zip)
-3. Unzip the mod into your mods folder located in (`GDPatch/mods/customspheres`)
+3. Unzip the mod into your mods folder located in `GDPatch/mods/customspheres`
 4. You can now play custom levels!
 
 ## + WARNING
-This mod is work-in-progress and may be incompatible with other mods and may cause random crashes. It is recommended to back up your saves before using this mod.
+This mod is work-in-progress. It may be incompatible with other mods or cause random crashes. It is recommended to back up your saves before using this mod.
 
 ## + BASIC USAGE
-The mod loads custom levels located in `GDPatch/mods/customspheres/levels`.
-Levels must have a valid scene file created by Godot or the mods compiler tools.
-Levels can be standalone `.scn` or `.tscn` files, or named folders containing their respective scene file and configs.
+The mod loads custom levels located in `GDPatch/mods/customspheres/levels`. Levels must be a valid `.map` file created by Trenchbroom.
 
 ## + QUICKSTART
-To create a custom level, you will need [Trenchbroom 2025.4+](https://github.com/TrenchBroom/TrenchBroom/releases#release-v2025.4)
+To create a custom level, you will need [Trenchbroom 2025.4](https://github.com/TrenchBroom/TrenchBroom/releases#release-v2025.4)
 
-This mod ships with an FGD preconfigured for Trenchbroom under `CICADAMATA/GDPatch/mods/customspheres/trenchbroom` and an internal FGD resource for the map compiler located under `customspheres/fgd`
-\
-It is **Not Recommended** that you touch the FGD resources unless you know what you are doing.
+This mod ships with an FGD preconfigured for Trenchbroom under `CICADAMATA/GDPatch/mods/customspheres/trenchbroom`.
 
 For more information on mapping for Trenchbroom, refer to the [official documentation](https://trenchbroom.github.io/manual/latest/)
 
+[Here is a useful playlist of Trenchbroom tutorials from the wonderful dumptruck_ds](https://www.youtube.com/playlist?list=PLgDKRPte5Y0AZ_K_PZbWbgBAEt5xf74aE)
+
 #### + Setting up Trenchbroom
-1. Install Trenchbroom.
-2. Copy the contents of `customspheres/trenchbroom` into a new folder into `AppData/Roaming/Trenchbroom/games`
-3. Use [GDRE Tools](https://github.com/GDRETools/gdsdecomp) or [PCKExplorer](https://github.com/DmitriySalnikov/GodotPCKExplorer) to decompile and extract necessary resources from the game.
-4. Extract the textures located under `FuncGodot/textures`
-5. For optional editor display of mapping entities, extract the models located under `FuncGodot/models`, or optionally provide your own. Your models will have to be exported as `.glb` and named the same as their counterpart under `customspheres/fgd/entities`
-6. Create a folder i.e `CicadamataFGD` to hold your FGD assets, and place the textures and models folders inside
-7. Set your game path to your FGD folder in Trenchbroom under `View > Preferences > Cicadamata > Game Path`
+1. Install Trenchbroom
+2. Copy the contents of `customspheres/trenchbroom` into a new folder into `AppData/Roaming/Trenchbroom/games/cicadamata`
+3. Use [GDRE Tools](https://github.com/GDRETools/gdsdecomp) or [PCKExplorer](https://github.com/DmitriySalnikov/GodotPCKExplorer) to decompile and extract necessary resources from the game. Make sure to open the project in 'full recovery' mode.
+4. Extract the textures located under `FuncGodot/textures` into `AppData/Roaming/Trenchbroom/games/cicadamata/textures`
+5. Navigate to `AppData/Roaming/Trenchbroom/games/cicadamata` and place the textures inside of the `textures` folder
+6. Set your game path to `AppData/Roaming/Trenchbroom/games/cicadamata` in Trenchbroom under `View > Preferences > Cicadamata > Game Path`
 
-#### + Setting up compiler tools
-1. Navigate to `Run > Compile Map`
-2. Change the 'Run Tool' path to your game executable (`steam/steamapps/common/CICADAMATA/CICADAMATA.exe`)
-3. Set parameters to `run_map::${MAP_DIR_PATH}/${MAP_FULL_NAME}::${MAP_BASE_NAME}`
-4. You can now run the compile tools and start testing your new map!
+By default, the mod ships with display models for Rings, Glass and the Dropship. For optional editor display of mapping entities like enemies, extract the models located under `Assets/models`, or optionally provide your own. Your models will have to be exported as `.glb` and named the same as their counterpart inside the `customspheres/trenchbroom/CICADAMATA.fgd` file
 
-Once you run the compile tools, the mod will generate a scene file and a config file located under `CICADAMATA/GDPatch/mods/customspheres/levels/mycustomlevel`
+#### + Setting up Trenchbroom Compiler Tools
+1. Navigate to `Run > Compile Map`, and select the profile 'Export Map'
+2. Change the 'Working Directory' path to `SteamLibrary/steamapps/common/CICADAMATA/GDPatch/mods/customspheres/levels`
+3. Set the 'Export Map' file path to `${WORK_DIR_PATH}/${MAP_BASE_NAME}/${MAP_FULL_NAME}`
+4. Change the 'Run Tool' path to your game executable `SteamLibrary/steamapps/common/CICADAMATA/CICADAMATA.exe`
+5. Set the 'Run Tool' parameters to `export_map::${MAP_DIR_PATH}/${MAP_FULL_NAME}::${MAP_BASE_NAME}`
+6. You can now press the 'Compile' button and begin testing your map!
+
+Once you run the compile tools, a `.map` file and a config file will be created inside of `CICADAMATA/GDPatch/mods/customspheres/levels/your-custom-level`
+
+## + Your first level
+For your level to be playable, you will need to add a Ship, 4 Cores, and an Exit.
 
 ## + Customizing your level
 #### Config Properties
@@ -95,15 +99,13 @@ You can provide a `terminal.png` for the icon that appears your terminal screens
 Your level is most likely not set up correctly. Check the console output in Trenchbroom for more information, as well as make sure your level has a Ship.
 
 #### !my level isn't showing up in the menu!
-Ensure your level has a unique name that does not conflict with any other level, as the compiler will overwrite any scene with the same name.
+Ensure your level has a unique name that does not conflict with any other level, as the compiler tools will overwrite any map with the same name.
 
 #### !one of my mods is broken!
 This mod uses heavy script patching and is quite WIP, so it may be incompatible with other mods that do lots of patching.
 
 #### !my level is dark and has no lighting!
-Ensure your level has an env.
-
-Pull requests are always welcome.
+Ensure your level has an env entity.
 
 #### + Caveats // TBD // Bugs
 - Moving platforms do not have sound or particles
