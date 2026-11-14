@@ -62,6 +62,8 @@ func _ready()->void:
 func init_map_builder()->void:
 	print('[CUSTOM_SPHERES] INIT MAP BUILDER');
 	__map_builder = FuncGodotMap.new();
+	__map_builder.build_complete.connect(_on_build_ok);
+	__map_builder.build_failed.connect(_on_build_fail);
 	__map_builder.map_settings = DEFAULT_MAP_SETTINGS.duplicate();
 	__map_builder.map_settings.entity_fgd = map_fgd;
 	__map_builder.hyperplane_size = self.HYPERPLANE_SIZE;
@@ -349,7 +351,8 @@ func load_custom_levels()->void:
 			print('[CUSTOM_SPHERES] NO LEVELS FOUND');
 			return;
 
-		print('[CUSTOM_SPHERES] LOADED LEVELS:\n%s' % custom_levels.keys());
+		print('[CUSTOM_SPHERES] LOADED LEVELS');
+		print(custom_levels.keys());
 
 
 func get_temp_path()->String:
@@ -391,6 +394,11 @@ func create_temp(path:String)->void:
 		print('[CUSTOM_SPHERES] RUN MAP ERROR, INVALID PATH');
 		return;
 
+	var _temp_scene_path: String = __temp_directory.path_join("temp.scn");
+
+	if FileAccess.file_exists(_temp_scene_path):
+		LoadingScreen.cached_scene = null;#we have to manually edit the games scene cache to remove the temp scene... lol...
+
 	set_owner_recursive(__map_builder, __map_builder);
 
 	var _scene: PackedScene = PackedScene.new();
@@ -401,9 +409,6 @@ func create_temp(path:String)->void:
 		Audio.sound_play_ui(Audio.sndAngelError);
 		fallback_to_menu();
 		return;
-
-	var _temp_scene_path: String = __temp_directory.path_join("temp.scn");
-	var _level_dir_path: String = __level_directory.path_join(path);
 
 	var _temp_dir: DirAccess = DirAccess.open(__temp_directory);
 	if !_temp_dir.dir_exists(__temp_directory):
@@ -428,8 +433,6 @@ func build_and_run_map(path:String)->void:
 		return;
 
 	__build_path = _map_path;
-	__map_builder.build_complete.connect(_on_build_ok);
-	__map_builder.build_failed.connect(_on_build_fail);
 	__map_builder.global_map_file = __build_path;
 	__map_builder.build();
 
