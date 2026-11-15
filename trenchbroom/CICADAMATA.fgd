@@ -1,8 +1,3 @@
-@PointClass color(8 52 204) size(-8.0 -8.0 -8.0, 8.0 8.0 8.0) = ENV_CUSTOM : "the environment" 
-[
-	skybox_path(string) : "" : ""
-]
-
 @PointClass color(8 52 204) size(-8.0 -8.0 -8.0, 8.0 8.0 8.0) = ENV_RAIN : "the environment" []
 
 @PointClass color(8 52 204) size(-8.0 -8.0 -8.0, 8.0 8.0 8.0) = ENV_WORLD1 : "the environment" []
@@ -78,8 +73,6 @@
 
 @PointClass color(204 201 0) size(-8.0 -20.0 -8.0, 8.0 16.0 8.0) model({ "path": "models/heal.glb", "scale": 32 }) = HEAL : "heal" []
 
-@PointClass color(204 204 204) model({"path": "player.glb", "scale": 48 }) size(-8.0 -8.0 -8.0, 8.0 8.0 8.0) = player : "spawns an unarmed player" []
-
 @PointClass color(204 204 204) model({ "path": "models/ring.glb", "scale": 32 }) size(-8.0 -8.0 -8.0, 8.0 8.0 8.0) = RING : "		ring
 ring			ring
 		ring " 
@@ -97,6 +90,10 @@ ring			ring
 @PointClass color(204 201 0) size(-8.0 -20.0 -8.0, 8.0 16.0 8.0) model({ "path": "models/star.glb", "scale": 32 }) = STAR : "star" []
 
 @PointClass color(204 204 204) model({ "path": "models/ship.glb", "scale": 32 }) size(-8.0 -8.0 -8.0, 8.0 8.0 8.0) = ship : "set sail" 
+[
+	angles(string) : "" : "0.0 0.0 0.0"
+]
+@PointClass size(-8.0 -8.0 -8.0, 8.0 8.0 8.0) color(255 149 0) model({ "path": "models/terminal.glb", "scale": 32 }) = TERMINAL : "reading is fun" 
 [
 	angles(string) : "" : "0.0 0.0 0.0"
 ]
