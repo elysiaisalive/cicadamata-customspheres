@@ -25,7 +25,7 @@ For more information on mapping for Trenchbroom, refer to the [official document
 #### + Setting up Trenchbroom
 1. Install Trenchbroom
 2. Copy the contents of `customspheres/trenchbroom` into a new folder into `AppData/Roaming/Trenchbroom/games/cicadamata`
-3. Use [GDRE Tools](https://github.com/GDRETools/gdsdecomp) or [PCKExplorer](https://github.com/DmitriySalnikov/GodotPCKExplorer) to decompile and extract necessary resources from the game. Make sure to open the project in 'full recovery' mode.
+3. Use [GDRE Tools](https://github.com/GDRETools/gdsdecomp) to decompile and extract necessary resources from the game. **Make sure to open the project in 'Full Recovery' mode, ensure the .godot folder is also selected when extracting assets.**
 4. Extract the textures located under `FuncGodot/textures` into `AppData/Roaming/Trenchbroom/games/cicadamata/textures`
 5. Navigate to `AppData/Roaming/Trenchbroom/games/cicadamata` and place the textures inside of the `textures` folder
 6. Set your game path to `AppData/Roaming/Trenchbroom/games/cicadamata` in Trenchbroom under `View > Preferences > Cicadamata > Game Path`
@@ -40,7 +40,7 @@ By default, the mod ships with display models for Rings, Glass and the Dropship.
 5. Set the 'Run Tool' parameters to `export_map::${MAP_DIR_PATH}/${MAP_FULL_NAME}::${MAP_BASE_NAME}`
 6. You can now press the 'Compile' button and begin testing your map!
 
-Once you run the compile tools, a `.map` file and a config file will be created inside of `CICADAMATA/GDPatch/mods/customspheres/levels/your-custom-level`
+Once you run the compile tools, a map file and a config file will be created inside of `CICADAMATA/GDPatch/mods/customspheres/levels/your-custom-level`
 
 ## + Your first level
 For your level to be playable, you will need to add a Ship, 4 Cores, and an Exit.
@@ -65,7 +65,7 @@ For your level to be playable, you will need to add a Ship, 4 Cores, and an Exit
 | location | string | Location on the dropship screen |
 | conditions | string | Conditions on the dropship screen |
 | warning | string | Warning on the dropship screen |
-| next_level | string | The name of the next level to deploy into. Must be a valid level inside `GDPatch/mods/customspheres/levels`
+| next_level | string | The name of the next level to deploy into. Must be a valid `.map` file in `GDPatch/mods/customspheres/levels`
 | terminal_title | string | The title of your terminal e.x "+ CUSTOM.ONR" |
 | terminal_date | string | The date of your terminal e.x "DD_MMM_7AS" |
 | terminal_text | string | The text of your terminal |
@@ -77,15 +77,28 @@ For your level to be playable, you will need to add a Ship, 4 Cores, and an Exit
 #### + Custom Images
 You can provide custom icons and thumbnails for levels by adding an `icon.png` and a `thumbnail.png`.
 It is recommended to keep icons at `9x9`, and thumbnails at `84x69` to keep consistency with the games style.
+
 #### + Custom Music
 To add custom music to your level you must add an `intro.ogg` and `main.ogg`.
+
 #### + Custom Skybox and Ambience
-Levels can also have a custom ambient track and skybox by adding respective `ambience.ogg` and `skybox.png`.
+Skyboxes influence the ambient light colour of your level. To add a skybox, simply add a `skybox.png` to your levels folder.
+Levels can also have a custom ambient track by adding a `ambience.ogg`.
 Skyboxes are recommended to be authored at `2048x1024` and then rescaled to `1024x1024` for the final texture.
+
 #### + Custom Terminal
 For custom terminal text, see the above config properties chart.
 
 You can provide a `terminal.png` for the icon that appears your terminal screens. It is recommended to author your icons at `1024x1024`, and white monochromatic to keep consistency with the games style.
+
+#### + Custom Textures (Advanced)
+In order to better fit your levels aesthetics you may desire custom textures. You will need [WadMaker](https://github.com/pwitvoet/wadmaker/releases/latest)
+
+*For information on how to use WadMaker, refer to the [documentation](https://github.com/pwitvoet/wadmaker/blob/master/wadmaker.md)*
+
+Once you have your wad file, you will need to place it in your levels folder and rename it to `textures.wad`. Then, in Trenchbroom under the 'Entity' tab while having nothing selected, navigate to the 'Wad Files' menu and click the `+`. You may now select the `textures.wad` that should be located in your level folder.
+
+###### *Support for both WAD2 and WAD3 is implemented*
 
 ### + Level Design Tips // Considerations
 - Keep grid size at `32x` for most main level geometry.
@@ -102,7 +115,7 @@ Your level is most likely not set up correctly. Check the console output in Tren
 Ensure your level has a unique name that does not conflict with any other level, as the compiler tools will overwrite any map with the same name.
 
 #### !one of my mods is broken!
-This mod uses heavy script patching and is quite WIP, so it may be incompatible with other mods that do lots of patching.
+This mod uses heavy script patching and is in a **Beta state**, so it may be incompatible with other mods that do lots of patching.
 
 #### !my level is dark and has no lighting!
 Ensure your level has an env entity.
@@ -113,7 +126,6 @@ Ensure your level has an env entity.
 - Rotating certain entities does not work yet
 - Scores do not save
 - Player leaderboards are not available
-- Custom map textures are currently not possible
 - Music will restart upon deployment in a level after transitioning to `next_level`
 
 ### + ACCESS USER CONTENT AT YOUR OWN RISK +

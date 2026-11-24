@@ -24,11 +24,7 @@ GDPatch.patch_script_as_text("Scripts/UI/custom.gdc", function(ctx, src)
 			for bleh in _lvlbleh.get_children():
 				bleh.queue_free()
 
-		if !GDPatch.get_mod("customspheres").custom_levels.is_empty():
-			for lvl in GDPatch.get_mod("customspheres").custom_levels:
-				var _new_lvlbutton: ColorRect = load("res://Scenes/UI/level_button.tscn").instantiate()
-				GDPatch.get_mod("customspheres").init_levelbutton(_new_lvlbutton, lvl)
-				_lvlbleh.add_child(_new_lvlbutton)
+		GDPatch.get_mod("customspheres").init_custom_menu(_lvlbleh);
 ]])
 	return src
 end)
@@ -84,7 +80,7 @@ GDPatch.patch_script_as_text("Scripts/System/global.gdc", function(ctx, src)
 		_leveldata(_lvl);
 		if !simple: Audio.sound_play_ui(Audio.sndUIGameStart);
 
-		GDPatch.get_mod("customspheres").build_and_run_map(_lvl);
+		GDPatch.get_mod("customspheres").build_map(_lvl);
 		LoadingScreen.start_loading(GDPatch.get_mod("customspheres").get_temp_path(), stop_music, simple);
 		return;
 ]])
@@ -97,7 +93,7 @@ GDPatch.patch_script_as_text("Scripts/System/global.gdc", function(ctx, src)
 		utils.escape([[func _nextlevel():]]),
 		[[%0
 	if GDPatch.get_mod("customspheres").custom_levels.has(global.currentlevel):
-		var _next_level: String = GDPatch.get_mod("customspheres").get_nextlevel(global.currentlevel)
+		var _next_level: String = GDPatch.get_mod("customspheres").get_next_level(global.currentlevel)
 		global.play_intro_music = false
 		Audio.music_resume()
 		Audio.music_resume2()
@@ -197,11 +193,11 @@ GDPatch.patch_script_as_text("Scripts/UI/level_complete.gdc", function(ctx, src)
 		[[%0
 	if GDPatch.get_mod("customspheres").custom_levels.has(global.currentlevel):
 		var _col: Color = GDPatch.get_mod("customspheres").get_world_colour(global.currentlevel)
-		print(GDPatch.get_mod("customspheres").custom_levels[level].get('world_colour'))
+		
 		$LevelCompleteUI/bg.color = _col
 		pixelmat.set_shader_parameter("colorr", _col)
 
-		if !GDPatch.get_mod("customspheres").get_nextlevel(global.currentlevel).is_empty():
+		if !GDPatch.get_mod("customspheres").get_next_level(global.currentlevel).is_empty():
 			$LevelCompleteUI/HBoxContainer/cont.show()
 		else:
 			$LevelCompleteUI/HBoxContainer/cont.hide()
@@ -226,7 +222,7 @@ GDPatch.patch_script_as_text("Scripts/UI/deploy_screen.gdc", function(ctx, src)
 		utils.escape([[func _ready() -> void :]]),
 		[[%0
 	if GDPatch.get_mod("customspheres").custom_levels.has(global.currentlevel):
-		if !GDPatch.get_mod("customspheres").get_nextlevel(global.currentlevel).is_empty():
+		if !GDPatch.get_mod("customspheres").get_next_level(global.currentlevel).is_empty():
 			$TextureRect2/bar.color = GDPatch.get_mod("customspheres").get_world_colour(global.currentlevel)
 			Audio.sound_play_ui(Audio.sndDeployClick)
 			if saves.skin_portrait == 0:
@@ -236,7 +232,7 @@ GDPatch.patch_script_as_text("Scripts/UI/deploy_screen.gdc", function(ctx, src)
 			$ColorRect/Lvl.text = GDPatch.get_mod("customspheres").custom_levels.get(global.currentlevel).title
 			$ColorRect/Lvl2.text = GDPatch.get_mod("customspheres").custom_levels.get(global.currentlevel).pretitle
 
-			var _next: String = GDPatch.get_mod("customspheres").get_nextlevel(global.currentlevel)
+			var _next: String = GDPatch.get_mod("customspheres").get_next_level(global.currentlevel)
 			$ColorRect4/Lvl.text = GDPatch.get_mod("customspheres").custom_levels.get(_next).title
 			$ColorRect4/Lvl2.text = GDPatch.get_mod("customspheres").custom_levels.get(_next).pretitle
 
@@ -275,7 +271,7 @@ GDPatch.patch_script_as_text("Scripts/UI/pause.gdc", function(ctx, src)
 		_lolmat.set_shader_parameter("bg_color",Color("a0a0a0"))
 		_lolmat.set_shader_parameter("fg_color",Color("ffffff"))
 
-	if GDPatch.get_mod("customspheres").get_nextlevel(global.currentlevel).is_empty():
+	if GDPatch.get_mod("customspheres").get_next_level(global.currentlevel).is_empty():
 		$Panel/GridContainer/playnext.hide()
 ]])
 	return src
