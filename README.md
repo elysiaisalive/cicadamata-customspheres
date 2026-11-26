@@ -11,7 +11,7 @@ PROVIDES ACCESS TO USER GENERATED SPHERES
 This mod is work-in-progress. It may be incompatible with other mods or cause random crashes. It is recommended to back up your saves before using this mod.
 
 ## + BASIC USAGE
-The mod loads custom levels located in `GDPatch/mods/customspheres/levels`. Levels must be a valid `.map` file created by Trenchbroom.
+The mod loads custom levels located in `GDPatch/mods/customspheres/levels`. Level folders must contain a valid `.map` file created by Trenchbroom.
 
 ## + QUICKSTART
 To create a custom level, you will need [Trenchbroom 2025.4](https://github.com/TrenchBroom/TrenchBroom/releases#release-v2025.4)
@@ -58,7 +58,7 @@ For your level to be playable, you will need to add a Ship, 4 Cores, and an Exit
 | volumetric_fog_enabled | boolean | Controls if volumetric fog is enabled.
 | fog_skyaffect | number | A range of `0.0 - 1.0`. Changes how much fog obscures the skybox
 | volumetric_fog_skyaffect | number | A range of `0.0 - 1.0`. Changes how much volumetric fog obscures the skybox
-| music_override | string | Useful for level packs. Points to another levels song to use instead of providing `intro.ogg` or `main.ogg` files
+| music_override | string | Can be set to another levels name to use its music instead of providing `intro.ogg` or `main.ogg` files. Alternatively, use `world1`, `bonus1` etc to use official tracks.
 | pretitle | string | The name of the sphere
 | title | string | The name of the level
 | transition | string | Short blurb that appears during level transitions
@@ -80,6 +80,7 @@ It is recommended to keep icons at `9x9`, and thumbnails at `84x69` to keep cons
 
 #### + Custom Music
 To add custom music to your level you must add an `intro.ogg` and `main.ogg`.
+To use an official track from the game, you can set the value of `music_override` in the config file to `world1 - world6`.
 
 #### + Custom Skybox and Ambience
 Skyboxes influence the ambient light colour of your level. To add a skybox, simply add a `skybox.png` to your levels folder.

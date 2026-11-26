@@ -198,10 +198,6 @@ func get_next_level(level:String)->String:
 	return GDPatch.get_mod("customspheres").custom_levels[level].get('next_level', '');
 
 
-func get_chapter_end(level:String)->String:
-	return GDPatch.get_mod("customspheres").custom_levels[level].get('chapter_end', false);
-
-
 func get_icon(level:String)->ImageTexture:
 	return GDPatch.get_mod("customspheres").custom_levels[level].get('icon', load("res://Assets/UI/LevelIcons/bonus_icon.png"));
 
@@ -351,7 +347,6 @@ func load_texture_wad(path:String)->QuakeWadFile:
 	return QuakeWadFile.new(_try_load);
 
 
-
 func load_custom_levels()->void:
 	print('[CUSTOM_SPHERES] LOADING LEVELS');
 	var _main_dir: DirAccess = DirAccess.open(__level_directory);
@@ -396,13 +391,7 @@ func load_level(fullpath:String, level:String)->void:
 	custom_levels[level]["fgd"] = load_fgd(level);
 	custom_levels[level]["wad"] = load_texture_wad(level);
 
-	if custom_levels[level].get("music_override").is_empty():
-		custom_levels[level]["intromusic"] = load_sound(level.path_join("intro.ogg"));
-		custom_levels[level]["levelmusic"] = load_sound(level.path_join("main.ogg"));
-	else:
-		var _override_path: String = __level_directory.path_join(custom_levels[level].get("music_override"));
-		custom_levels[level]["intromusic"] = load_sound(_override_path.path_join("intro.ogg"));
-		custom_levels[level]["levelmusic"] = load_sound(_override_path.path_join("main.ogg"));
+	load_level_music(level);
 
 	custom_levels[level]["icon"] = load_icon(level);
 	custom_levels[level]["skybox"] = load_skybox(level);
@@ -410,8 +399,48 @@ func load_level(fullpath:String, level:String)->void:
 	custom_levels[level]["terminal"] = load_terminal_icon(level);
 
 
-func get_temp_path()->String:
-	return __level_temp_path;
+func load_level_music(level:String)->void:
+	var _override_path: String = custom_levels[level].get("music_override");
+
+	if _override_path.is_empty():
+		custom_levels[level]["intromusic"] = load_sound(level.path_join("intro.ogg"));
+		custom_levels[level]["levelmusic"] = load_sound(level.path_join("main.ogg"));
+		return;
+
+	match _override_path:
+		'world1':
+			custom_levels[level]["intromusic"] = Audio.mscWorld1_Intro;
+			custom_levels[level]["levelmusic"] = Audio.mscWorld1_Main;
+		'world2':
+			custom_levels[level]["intromusic"] = Audio.mscWorld2_Intro;
+			custom_levels[level]["levelmusic"] = Audio.mscWorld2_Main;	
+		'world3':
+			custom_levels[level]["intromusic"] = Audio.mscWorld3_Intro;
+			custom_levels[level]["levelmusic"] = Audio.mscWorld3_Main;
+		'world4':
+			custom_levels[level]["intromusic"] = Audio.mscWorld4_Intro;
+			custom_levels[level]["levelmusic"] = Audio.mscWorld4_Main;
+		'world5':
+			custom_levels[level]["intromusic"] = Audio.mscWorld5_Intro;
+			custom_levels[level]["levelmusic"] = Audio.mscWorld5_Main;
+		'world6':
+			custom_levels[level]["intromusic"] = Audio.mscWorld6_Intro;
+			custom_levels[level]["levelmusic"] = Audio.mscWorld6_Main;
+		'bonus1':
+			custom_levels[level]["intromusic"] = Audio.mscBonus_Intro;
+			custom_levels[level]["levelmusic"] = Audio.mscBonus_Main;
+		'bonus2':
+			custom_levels[level]["intromusic"] = Audio.mscBonus2_Intro;
+			custom_levels[level]["levelmusic"] = Audio.mscBonus2_Main;
+		'bonus3':
+			custom_levels[level]["intromusic"] = Audio.mscBonus3_Intro;
+			custom_levels[level]["levelmusic"] = Audio.mscBonus3_Main;
+		'bonus4':
+			custom_levels[level]["intromusic"] = Audio.mscBonus4_Intro;
+			custom_levels[level]["levelmusic"] = Audio.mscBonus4_Main;
+		_:
+			custom_levels[level]["intromusic"] = load_sound(_override_path.path_join("intro.ogg"));
+			custom_levels[level]["levelmusic"] = load_sound(_override_path.path_join("main.ogg"));
 
 
 func export_map()->void:
@@ -486,10 +515,11 @@ func build_map(path:String)->void:
 		print("[CUSTOM_SPHERES] ERROR BUILDING MAP, NO MAP FILE FOUND");
 		fallback_to_menu();
 		return;
-	print(custom_levels[path])
-	if get_wad(path):
-		print('WADDING IT UP')
-		__map_builder.map_settings.texture_wads.append(get_wad(path));
+
+	var _wad: QuakeWadFile = get_wad(path);
+
+	if _wad != null:
+		__map_builder.map_settings.texture_wads.append(_wad);
 
 	__build_path = _map_fpath;
 	__map_builder.global_map_file = __build_path;
