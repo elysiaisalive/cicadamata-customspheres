@@ -14,6 +14,7 @@ var __map_builder: FuncGodotMap;
 var __launch_args: PackedStringArray;
 
 
+const VERSION: String = 'v0.3';
 const MAP_EXTENSION: String = '.map';
 const HYPERPLANE_SIZE: float = 2048.0;
 const DEFAULT_FGD: FuncGodotFGDFile = preload("res://FuncGodot/CICADAMATA_fgd.tres");
@@ -48,6 +49,7 @@ const DEFAULT_LVL_CFG: Dictionary = {
 
 
 func _ready()->void:
+	print('[CUSTOM_SPHERES] WELCOME %s' % VERSION);
 	__launch_args = OS.get_cmdline_args();
 
 	init_custom_dir();
@@ -231,6 +233,10 @@ func get_map_path(level:String)->String:
 	return _path;
 
 
+func get_temp_path()->String:
+	return __level_temp_path;
+
+
 func get_wad(level:String)->QuakeWadFile:
 	var _wad_path: QuakeWadFile = GDPatch.get_mod("customspheres").custom_levels[level].get("wad");
 
@@ -266,6 +272,7 @@ func load_icon(level:String)->ImageTexture:
 
 func load_fgd(level:String)->FuncGodotFGDFile:
 	return DEFAULT_FGD.duplicate();
+
 	var _dir: String = __level_directory.path_join(level);
 	var _path: String = _dir.path_join("fgd.tres");
 
@@ -286,7 +293,7 @@ func load_fgd(level:String)->FuncGodotFGDFile:
 
 			if _try_load:
 				return _try_load;
-	print('[CUSTOM_SPHERES] Error loading level FGD, using default');
+	print('[CUSTOM_SPHERES][%s] Error loading level FGD, using default' % level);
 	return DEFAULT_FGD.duplicate();
 
 
@@ -295,7 +302,7 @@ func load_config(level:String)->Dictionary:
 	var _path: String = _dir.path_join("config.cfg");
 
 	if !FileAccess.file_exists(_path):
-		print('[CUSTOM_SPHERES] Error loading level cfg, not found');
+		print('[CUSTOM_SPHERES][%s] Error loading level cfg, not found' % level);
 		return DEFAULT_LVL_CFG.duplicate();
 
 	var _file: FileAccess = FileAccess.open(_path, FileAccess.READ);
@@ -310,7 +317,7 @@ func load_config(level:String)->Dictionary:
 
 func load_sound(path:String)->AudioStreamOggVorbis:
 	if !FileAccess.file_exists(path):
-		print('[CUSTOM_SPHERES] Error loading audio, not found'); 
+		print('[CUSTOM_SPHERES][%s] Error loading audio, not found' % path); 
 		return null;
 
 	var _music: AudioStreamOggVorbis = AudioStreamOggVorbis.load_from_file(path);
@@ -320,7 +327,7 @@ func load_sound(path:String)->AudioStreamOggVorbis:
 
 func load_texture(path:String)->ImageTexture:
 	if !FileAccess.file_exists(path):
-		print('[CUSTOM_SPHERES] Error loading texture, not found'); 
+		print('[CUSTOM_SPHERES][%s] Error loading texture, not found' % path); 
 		return null;
 
 	var _bytes: PackedByteArray = FileAccess.get_file_as_bytes(path);
@@ -335,13 +342,13 @@ func load_texture_wad(path:String)->QuakeWadFile:
 	var _wadpath: String = _path.path_join("textures.wad");
 
 	if !FileAccess.file_exists(_wadpath):
-		print('[CUSTOM_SPHERES] Error loading WAD, not found'); 
+		print('[CUSTOM_SPHERES][%s] Error loading WAD, not found' % _wadpath); 
 		return;
 
 	var _try_load: Dictionary[String, ImageTexture] = WADLoader.load_wad(_wadpath);
 
 	if _try_load.is_empty():
-		print('[CUSTOM_SPHERES] Error loading WAD, no textures'); 
+		print('[CUSTOM_SPHERES][%s] Error loading WAD, no textures' % path); 
 		return;
 
 	return QuakeWadFile.new(_try_load);
